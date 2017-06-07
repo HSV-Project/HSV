@@ -50,7 +50,7 @@
 				<div class="item active">
 				  <img src="img/main-slider1.jpg" alt="">
 				  <div class="carousel-caption">
-					<h3>Description: This book is all about java programming.</h3>
+					<h3>Description: </h3>
 					<p>Cost: 50$</p>
 				  </div>
 				</div>
