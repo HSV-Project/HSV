@@ -1,20 +1,9 @@
-
-<?php include 'server_pages/checkIfLogin.php';?>
-
-<?php
-require 'server_pages/Database.php';
-session_start();
-?>
-
-
-
-
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
     <div id="top">
         <div class="container">
             <div class="col-md-5 offer" data-animate="fadeInDown">
-                <span  class="lookLikeButton <?php echo checkIfLogin();?>" data-animate-hover="shake"> Offer of the day </span><span>Get flat 35% off on orders over $50!</span>
+                <span  class="lookLikeButton" data-animate-hover="shake"> Offer of the day </span><span>Get flat 35% off on orders over $50!</span>
             </div>
             <div class="col-md-7" data-animate="fadeInDown">
                 <ul class="menu">

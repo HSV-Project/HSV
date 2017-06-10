@@ -1,3 +1,7 @@
+<?php
+	require 'server_pages/Database.php';
+	
+	?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,13 +37,27 @@
   </head>
   
   <body>
+  <?php 
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+	{
+		if (isset($_POST['login'])) { //user logging in
+
+			require 'server_pages/login.php';
+			
+		}
+		
+		elseif (isset($_POST['register'])) { //user registering
+			
+			require 'server_pages/register.php';
+			
+		}
+	}
+	?>
+  
+  
   
 	<?php include 'header.php';?>
 	
-	<?php
-	require 'server_pages/Database.php';
-	session_start();
-	?>
 	
 	
 	
@@ -66,22 +84,22 @@
 
                         <hr>
 
-                        <form action="customer-orders.html" method="post">
+                        <form action="register.php" method="post">
 							<div class="form-group">
                                 <label for="fName">First Name</label>
-                                <input type="text" class="form-control" id="fname">
+                                <input type="text" class="form-control" id="firstname" name="firstname">
                             </div>
 							<div class="form-group">
                                 <label for="lName">Last Name</label>
-                                <input type="text" class="form-control" id="lName">
+                                <input type="text" class="form-control" id="lastname" name="lastname">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email">
+                                <input type="text" class="form-control" id="email" name="email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" id="password" name="password">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="register"><i class="fa fa-user-md"></i> Register</button>
@@ -99,15 +117,15 @@
 
                         <hr>
 
-                        <form action="customer-orders.html" method="post">
+                        <form action="register.php" method="post">
                             
 							<div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email">
+                                <input type="text" class="form-control" id="email" name="email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" id="password" name="password">
                             </div>
 							
 							<div>
