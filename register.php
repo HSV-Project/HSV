@@ -36,7 +36,10 @@
   
 	<?php include 'header.php';?>
 	
-	
+	<?php
+	require 'server_pages/Database.php';
+	session_start();
+	?>
 	
 	
 	
@@ -81,7 +84,7 @@
                                 <input type="password" class="form-control" id="password">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
+                                <button type="submit" class="btn btn-primary" name="register"><i class="fa fa-user-md"></i> Register</button>
                             </div>
                         </form>
                     </div>
@@ -111,7 +114,7 @@
 							<p class="text-right"><a href ="#">Forgot Password?</a></p>
 							</div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                                <button type="submit" class="btn btn-primary" name="login"><i class="fa fa-sign-in"></i> Log in</button>
                             </div>
                         </form>
                     </div>

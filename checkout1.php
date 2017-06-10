@@ -141,7 +141,7 @@
 
                             <div class="box-footer">
                                 <div class="pull-left">
-                                    <a href="basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                    <a href="cart.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to cart</a>
                                 </div>
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Continue to Delivery Method<i class="fa fa-chevron-right"></i>

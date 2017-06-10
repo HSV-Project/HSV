@@ -113,7 +113,7 @@
 
                             <div class="box-footer">
                                 <div class="pull-left">
-                                    <a href="basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Shipping method</a>
+                                    <a href="checkout2.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Delivery Method</a>
                                 </div>
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Continue to Order review<i class="fa fa-chevron-right"></i>

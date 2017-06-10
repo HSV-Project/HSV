@@ -1,11 +1,22 @@
+
+<?php include 'server_pages/checkIfLogin.php';?>
+
+<?php
+require 'server_pages/Database.php';
+session_start();
+?>
+
+
+
+
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
     <div id="top">
         <div class="container">
-            <div class="col-md-6 offer" data-animate="fadeInDown">
-                <span  class="lookLikeButton" data-animate-hover="shake">Offer of the day</span>  <span>Get flat 35% off on orders over $50!</span>
+            <div class="col-md-5 offer" data-animate="fadeInDown">
+                <span  class="lookLikeButton <?php echo checkIfLogin();?>" data-animate-hover="shake"> Offer of the day </span><span>Get flat 35% off on orders over $50!</span>
             </div>
-            <div class="col-md-6" data-animate="fadeInDown">
+            <div class="col-md-7" data-animate="fadeInDown">
                 <ul class="menu">
                     <li><a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-user" aria-hidden="true"></i>Login</a> <!--class="hidden"-->
                     </li>
@@ -16,7 +27,9 @@
                     <li><a href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a>
 					</li>
 					<li><a href="purchaseHistory.php"><i class="fa fa-archive" aria-hidden="true"></i>Purchase History</a>
-					</li>					
+					</li>
+					<li><a href="purchaseHistory.php"><i class="fa fa-lock" aria-hidden="true"></i>Log Out</a>
+					</li>						
                 </ul>
             </div>
         </div>
@@ -29,7 +42,7 @@
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="customer-orders.html" method="post">
+                        <form action="index.php" method="post">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="email-modal" placeholder="email">
                             </div>
@@ -43,7 +56,7 @@
 							
 							<div>
                             <p class="text-center">
-                                <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                                <button class="btn btn-primary" name="login"><i class="fa fa-sign-in"></i> Log in</button>
                             </p>
 							</div>
 

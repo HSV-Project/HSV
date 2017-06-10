@@ -117,7 +117,7 @@
 
                             <div class="box-footer">
                                 <div class="pull-left">
-                                    <a href="checkout3.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Payment method</a>
+                                    <a href="checkout3.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Payment method</a>
                                 </div>
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Place an order<i class="fa fa-chevron-right"></i>
