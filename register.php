@@ -129,7 +129,7 @@
                             </div>
 							
 							<div>
-							<p class="text-right"><a href ="#">Forgot Password?</a></p>
+							<p class="text-right"><a href ="server_pages/forgot.php">Forgot Password?</a></p>
 							</div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="login"><i class="fa fa-sign-in"></i> Log in</button>
