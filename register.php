@@ -1,5 +1,5 @@
 <?php
-	require 'server_pages/Database.php';
+	require 'Database.php';
 	
 	?>
 <!DOCTYPE html>
@@ -42,13 +42,13 @@
 	{
 		if (isset($_POST['login'])) { //user logging in
 
-			require 'server_pages/login.php';
+			require 'login.php';
 			
 		}
 		
 		elseif (isset($_POST['register'])) { //user registering
 			
-			require 'server_pages/register.php';
+			require 'register.php';
 			
 		}
 	}
@@ -129,7 +129,7 @@
                             </div>
 							
 							<div>
-							<p class="text-right"><a href ="server_pages/forgot.php">Forgot Password?</a></p>
+							<p class="text-right"><a href ="forgot.php">Forgot Password?</a></p>
 							</div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" name="login"><i class="fa fa-sign-in"></i> Log in</button>

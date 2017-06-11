@@ -1,4 +1,4 @@
-<?php include 'server_pages/checkIfLogin.php';?>
+<?php include 'checkIfLogin.php';?>
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
    
@@ -33,16 +33,16 @@
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="index.php" method="post">
+                        <form action="login.php" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="email-modal" placeholder="email">
+                                <input type="text" class="form-control" id="email-modal" placeholder="email" name="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password-modal" placeholder="password">
+                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="password">
                             </div>
 							
 							<div>
-							<p class="text-right"><a href ="#">Forgot Password?</a></p>
+							<p class="text-right"><a href ="forgot.php">Forgot Password?</a></p>
 							</div>
 							
 							<div>

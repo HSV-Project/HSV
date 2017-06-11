@@ -2,7 +2,7 @@
 /* The password reset form, the link to this page is included
    from the forgot.php email message
 */
-require 'server_pages/Database.php';
+require 'Database.php';
 session_start();
 
 // Make sure email and hash variables aren't empty

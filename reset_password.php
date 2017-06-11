@@ -1,6 +1,6 @@
 <?php
 /* Password reset process, updates database with new user password */
-require 'server_pages/Database.php';
+require 'Database.php';
 session_start();
 
 // Make sure the form is being submitted with method="post"

@@ -1,4 +1,5 @@
 <?php
+require_once 'Database.php';
 /* User login process, checks if user exists and password is correct */
 session_start();
 // Escape email to protect against SQL injections
