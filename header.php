@@ -100,7 +100,7 @@
                     </li>
 				</ul>
 				<ul class="nav navbar-nav navbar-left">
-                    <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="index.php">Add Product</a> <!--class="active"-->
+                    <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="sellerAddProduct.php">Add Product</a> <!--class="active"-->
                     </li>
 				</ul>
 

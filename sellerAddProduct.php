@@ -84,28 +84,28 @@
 							<label for="imageMain">
 							  Main Image
 							</label>
-							<input type="text" class="form-control" name="imageMain" autocomplete="off" id="imageMain"/>
+							<input type="file" class="form-control" name="imageMain" autocomplete="off" id="imageMain"/>
 						  </div>
 						  
 						  <div class="form-group">
 							<label for="subImg1">
 							  Sub Image 1
 							</label>
-							<input type="text" class="form-control" name="subImg1" autocomplete="off" id="subImg1"/>
+							<input type="file" class="form-control" name="subImg1" autocomplete="off" id="subImg1"/>
 						  </div>
 						  
 						  <div class="form-group">
 							<label for="subImg2">
 							  Sub Image 2
 							</label>
-							<input type="text" class="form-control" name="subImg2" autocomplete="off" id="subImg2"/>
+							<input type="file" class="form-control" name="subImg2" autocomplete="off" id="subImg2"/>
 						  </div>
 						  
 						  <div class="form-group">
 							<label for="subImg3">
 							  Sub Image 3
 							</label>
-							<input type="text" class="form-control" name="subImg3" autocomplete="off" id="subImg3"/>
+							<input type="file" class="form-control" name="subImg3" autocomplete="off" id="subImg3"/>
 						  </div>
 						  
 						  
