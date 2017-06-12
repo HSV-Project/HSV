@@ -1,3 +1,27 @@
+<?php
+    session_start();
+    $productList=$_SESSION['productList'];
+    $productIDpassed=$_GET['productId'];
+    //$department=$_GET['department'];
+
+    if(count($productList)>0){
+        foreach ($productList as $row){ 
+            if($row["productID"]==$productIDpassed){
+                $productID=$row["productID"];
+                $productName=$row["productName"];
+                $productDescShort=$row["productDescShort"];
+                $productDescLong=$row["productDescLong"];
+                $productPrice=number_format($row["productPrice"],2);
+                $productQuantityAvail=$row["productQuantityAvail"];
+                $productAddedDate=$row["productAddedDate"];
+                $productCategory=$row["productCategory"];
+                $productImage=$row["productImage"];
+                $productSellerId=$row["productSellerId"];
+            }
+        }
+    }
+    
+    ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +65,7 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                                <img src="img/detailbig1.jpg" alt="" class="img-responsive">
+                                <img src="<?php echo $productImage; ?>" alt="" class="img-responsive">
                             </div>
 
                             <div class="ribbon sale">
@@ -59,13 +83,13 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="box">
-                                <h1 class="text-center">White Blouse Armani</h1>
-                                <p class="goToDescription text-center"><a href="#details" class="scroll-to"><u>Scroll to product details, material & care and sizing</u></a>
+                                <h1 class="text-center"><?php echo $productName; ?></h1>
+                                <p class="goToDescription text-center"><a href="#details" class="scroll-to"><u>Scroll to product details</u></a>
                                 </p>
-                                <h2 class="price text-center">$124.00</h2>
+                                <h2 class="price text-center">$<?php echo $productPrice; ?></h2>
 								
 								<p class="text-center text-primary"><strong>Select Quantity</strong></p>
-								<p class="text-center"><input type="number" step ="1" min="0" max="5" /></p>
+								<p class="text-center"><input type="number" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" /></p>
 								
                                 <p class="text-center buttons">
                                     <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>                                  
@@ -74,8 +98,8 @@
 
                             </div>
 
-                            <div class="row" id="thumbs">
-                                <div class="col-xs-4">
+                             <div class="row" id="thumbs">
+                                <!--<div class="col-xs-4">
                                     <a href="img/detailbig1.jpg" class="thumb">
                                         <img src="img/detailsquare.jpg" alt="" class="img-responsive">
                                     </a>
@@ -89,17 +113,18 @@
                                     <a href="img/detailbig3.jpg" class="thumb">
                                         <img src="img/detailsquare3.jpg" alt="" class="img-responsive">
                                     </a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
 
                     </div>
 					
-					<div class="box" id="details">
+		<div class="box" id="details">
                         <p>
-                            <h4>Product details</h4>
-                            <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
-                            <h4>Material & care</h4>
+                            <h4>Details</h4>
+                            <p><?php echo $productDescShort; ?></p>
+                            <p><?php echo $productDescLong; ?></p>
+                            <!--<h4>Material & care</h4>
                             <ul>
                                 <li>Polyester</li>
                                 <li>Machine wash</li>
@@ -113,34 +138,34 @@
                             <blockquote>
                                 <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
                                 </p>
-                            </blockquote>
-							<form action="" method="post">
-								<div class="form-group">
-									<h4>Add a review</h4>
-									<p><input type="number" step="1" min="0" max="5" >Select star rating</p>
-								</div>
-								<div class="form-group">
-									<input type="text" name="review" placeholder="Enter your review here" class="form-control">
-								</div>
-								<div class="text-center">
-									<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save review</button>
-								</div>
-							</form>
-						
-							<div>
-								<h4>Reviews:</h4>
-							</div>
-							
-							
-							<div>
-								<span>Review by:"user name"</span>
-								<span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-								<span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-								<span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-								<span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-								<span class="glyphicon glyphicon-star" style="color:silver; font-size:1.3em;"></span>
-								<span>Review statement_________________________________________________________</span>								
-							</div>
+                            </blockquote>-->
+                            <form action="" method="post">
+                                    <div class="form-group">
+                                            <h4>Add a review</h4>
+                                            <p><input type="number" step="1" min="0" max="5" >Select star rating</p>
+                                    </div>
+                                    <div class="form-group">
+                                            <input type="text" name="review" placeholder="Enter your review here" class="form-control">
+                                    </div>
+                                    <div class="text-center">
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save review</button>
+                                    </div>
+                            </form>
+
+                            <div>
+                                    <h4>Reviews:</h4>
+                            </div>
+
+
+                            <div>
+                                    <span>Review by:"user name"</span>
+                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
+                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
+                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
+                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
+                                    <span class="glyphicon glyphicon-star" style="color:silver; font-size:1.3em;"></span>
+                                    <span>Review statement_________________________________________________________</span>								
+                            </div>
 							
 							
                     </div>

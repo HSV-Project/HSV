@@ -97,7 +97,7 @@
 		<div class="row same-height-row">
 		  <div class="col-md-4">
 			<div class="thumbnail">
-			  <a href="">
+                            <a href="productList.php?department=books">
 				<img src="img/Books.png" alt="books" >
 				<div class="caption">
 				  <h3 class="text-center">Books</h3>
@@ -107,7 +107,7 @@
 		  </div>
 		  <div class="col-md-4">
 			<div class="thumbnail">
-			  <a href="">
+			  <a href="productList.php?department=furniture">
 				<img src="img/furniture.jpeg" alt="furniture" >
 				<div class="caption">
 				  <h3 class="text-center">Furniture</h3>
@@ -117,7 +117,7 @@
 		  </div>
 		  <div class="col-md-4">
 				<div class="thumbnail">
-				  <a href="">
+				  <a href="productList.php?department=electronics">
 					<img src="img/electronics.jpg" alt="Electronics" >
 					<div class="caption">
 					  <h3 class="text-center">Electronics</h3>
