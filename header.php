@@ -75,7 +75,7 @@
             <div class="navbar-header">
 
                 <a class="navbar-brand home" href="index.php" data-animate-hover="bounce">
-                    <img src="img/logo.png" alt="Obaju logo" class="hidden-xs img-responsive">
+                    <img src="img/logo.png" alt="shop cart logo" class="hidden-xs img-responsive">
                 </a>
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -97,6 +97,10 @@
 
                 <ul class="nav navbar-nav navbar-left">
                     <li ><a href="index.php">Home</a> <!--class="active"-->
+                    </li>
+				</ul>
+				<ul class="nav navbar-nav navbar-left">
+                    <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="index.php">Add Product</a> <!--class="active"-->
                     </li>
 				</ul>
 
