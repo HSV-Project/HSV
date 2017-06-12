@@ -43,7 +43,7 @@
 					
 					  <h1 class="text-primary text-center">Add New Product</h1>
 					  <hr>	
-					  <form action="#.php" method="post">
+					  <form action="addProduct.php" method="post">
 						  
 						  <div class="form-group">
 							<label for="pName">
