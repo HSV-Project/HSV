@@ -223,7 +223,7 @@
 						  
 						  
 						 <div class="text-center"> 
-						  <button class="button btn-primary"/>Modify</button>
+						  <button class="btn btn-primary"/>Modify</button>
 						 </div>	
 					  </form>
 				  
