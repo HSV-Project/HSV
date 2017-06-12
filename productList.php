@@ -1,6 +1,6 @@
 <?php 
 
-include 'server_pages/departmentProductList.php'; 
+include 'departmentProductList.php'; 
 session_start();
 $department=$_GET['department'];
 $productList=get_products($department);
