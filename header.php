@@ -1,23 +1,25 @@
+<?php include 'checkIfLogin.php';?>
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
-    <div id="top">
+   
+	<div id="top">
         <div class="container">
             <div class="col-md-5 offer" data-animate="fadeInDown">
                 <span  class="lookLikeButton" data-animate-hover="shake"> Offer of the day </span><span>Get flat 35% off on orders over $50!</span>
             </div>
             <div class="col-md-7" data-animate="fadeInDown">
                 <ul class="menu">
-                    <li><a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-user" aria-hidden="true"></i>Login</a> <!--class="hidden"-->
+                    <li class="<?php echo checkIfLoginThenHide();?>"><a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-user" aria-hidden="true"></i>Login</a> <!--class="hidden"-->
                     </li>
-                    <li><a href="register.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Register</a>
+                    <li class="<?php echo checkIfLoginThenHide();?>"><a href="register.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Register</a>
                     </li>
                     <li><a href="contact.php"><i class="fa fa-phone" aria-hidden="true"></i>Contact</a>
                     </li>
-                    <li><a href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a>
+                    <li class="<?php echo checkIfNotLoginThenHide();?>"><a href="settings.php"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a>
 					</li>
-					<li><a href="purchaseHistory.php"><i class="fa fa-archive" aria-hidden="true"></i>Purchase History</a>
+					<li class="<?php echo checkIfNotLoginThenHide();?>"><a href="purchaseHistory.php"><i class="fa fa-archive" aria-hidden="true"></i>Purchase History</a>
 					</li>
-					<li><a href="purchaseHistory.php"><i class="fa fa-lock" aria-hidden="true"></i>Log Out</a>
+					<li class="<?php echo checkIfNotLoginThenHide();?>"><a href="logout.php"><i class="fa fa-lock" aria-hidden="true"></i>Log Out</a>
 					</li>						
                 </ul>
             </div>
@@ -31,16 +33,16 @@
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="index.php" method="post">
+                        <form action="login.php" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="email-modal" placeholder="email">
+                                <input type="text" class="form-control" id="email-modal" placeholder="email" name="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password-modal" placeholder="password">
+                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="password">
                             </div>
 							
 							<div>
-							<p class="text-right"><a href ="#">Forgot Password?</a></p>
+							<p class="text-right"><a href ="forgot.php">Forgot Password?</a></p>
 							</div>
 							
 							<div>

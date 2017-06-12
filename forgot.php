@@ -1,7 +1,52 @@
-<?php
-/* Displays all error messages */
+<?php 
+/* Reset your password form, sends reset.php password link */
+require 'Database.php';
 session_start();
+
+// Check if form submitted with method="post"
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) 
+{   
+    $email = $mysqli->escape_string($_POST['email']);
+    $result = $mysqli->query("SELECT * FROM Users WHERE email='$email'");
+
+    if ( $result->num_rows == 0 ) // User doesn't exist
+    { 
+        $_SESSION['message'] = "User with that email doesn't exist!";
+        header("location: error.php");
+    }
+    else { // User exists (num_rows != 0)
+
+        $user = $result->fetch_assoc(); // $user becomes array with user data
+        
+        $email = $user['email'];
+        $hash = $user['hash'];
+        $first_name = $user['firstName'];
+
+        // Session message to display on success.php
+        $_SESSION['message'] = "<p>Please check your email <span>$email</span>"
+        . " for a confirmation link to complete your password reset!</p>";
+
+        // Send registration confirmation link (reset.php)
+        $to      = $email;
+        $subject = 'Password Reset Link ( COSC 631 Project )';
+        $message_body = '
+        Hello '.$first_name.',
+
+        You have requested password reset!
+
+        Please click this link to reset your password:
+
+        http://localhost/631_Final_project/reset.php?email='.$email.'&hash='.$hash;  
+
+        mail($to, $subject, $message_body,'from:cosc631project');
+
+        header("location: success.php");
+  }
+}
 ?>
+
+
+
 
 
 
@@ -17,7 +62,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Error</title>
+    <title>Reset Your Password</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -54,17 +99,18 @@ session_start();
 				<div class="box">
 					<div class="form text-center">
 
-						<h1 class="text-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error</h1>
-						<p>
-							<?php 
-							if( isset($_SESSION['message']) AND !empty($_SESSION['message']) ): 
-								echo $_SESSION['message'];    
-							else:
-								header( "location: index.php" );
-							endif;
-							?>
-						</p>     
-						<a href="index.php"><button class="button button-block btn-primary"/><i class="fa fa-home" aria-hidden="true"></i>Home</button></a>
+						<h1 class="text-primary">Reset Your Password</h1>
+						<hr>
+						<form action="forgot.php" method="post">
+						 <div class="form-group">
+						  <label>
+							Email Address<span class="req">*</span>
+						  </label>
+						  <input type="email" class="form-control" required autocomplete="off" name="email"/>
+						  </div>
+						<div>
+						<button class="button button-block btn-primary"/>Reset</button></div>
+						</form>
 				  </div>
 			  </div>
 		  </div>

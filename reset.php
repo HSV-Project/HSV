@@ -1,6 +1,41 @@
-<?php 
+<?php
+/* The password reset form, the link to this page is included
+   from the forgot.php email message
+*/
+require 'Database.php';
 session_start();
+
+// Make sure email and hash variables aren't empty
+if( isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash']) )
+{
+    $email = $mysqli->escape_string($_GET['email']); 
+    $hash = $mysqli->escape_string($_GET['hash']); 
+
+    // Make sure user email with matching hash exist
+    $result = $mysqli->query("SELECT * FROM Users WHERE email='$email' AND hash='$hash'");
+
+    if ( $result->num_rows == 0 )
+    { 
+        $_SESSION['message'] = "You have entered invalid URL for password reset!";
+        header("location: error.php");
+    }
+}
+else {
+    $_SESSION['message'] = "Sorry, verification failed, try again!";
+    header("location: error.php");  
+}
 ?>
+
+
+
+
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +44,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Shop Cart</title>
+    <title>Reset Your Password</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,37 +75,15 @@ session_start();
 	<?php include 'header.php';?>
 	
 	
+	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6  col-md-offset-3">
-				<form action="saveChanges.php" method="post">
-					<div class="form-group">
-						<label for="fName">First Name</label>
-						<input type="text" class="form-control" id="fname" name="fname" placeholder="<?php echo $_SESSION["first_name"]?>">
-					</div>
-					<div class="form-group">
-						<label for="lName">Last Name</label>
-						<input type="text" class="form-control" id="lName" name="lName" placeholder="<?php echo $_SESSION["last_name"]?>">
-					</div>
+			<div class="col-md-6 col-md-offset-3">
+				<div class="box">
 					
-					<!-- This input field is needed, to get the email of the user -->
-						  <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">    
-					<div class ="text-center">
-						<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>Save Changes</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	<hr>
-	
-	
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6  col-md-offset-3">
-				<form action="changePassword.php" method="post">
+					  <h1 class="text-primary text-center">Choose Your New Password</h1>
+					  <hr>	
+					  <form action="reset_password.php" method="post">
 						  
 						  <div class="form-group">
 							<label for="pass">
@@ -84,24 +97,25 @@ session_start();
 							  Confirm New Password<span class="req">*</span>
 							</label>
 							<input type="password"required class="form-control" name="confirmpassword" autocomplete="off" id="confirm"/>
-						  </div> 
-							<!-- This input field is needed, to get the email of the user -->
-						  <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">   
+						  </div>
+						  
+						  <!-- This input field is needed, to get the email of the user -->
+						  <input type="hidden" name="email" value="<?= $email ?>">    
+						  <input type="hidden" name="hash" value="<?= $hash ?>">    
 						 <div class="text-center"> 
-						  <button class="btn btn-primary"/><i class="fa fa-wrench" aria-hidden="true"></i>Change Password</button>
+						  <button class="button btn-primary"/>Apply</button>
 						 </div>	
-			   </form>
-			</div>
-		</div>
-	</div>
+					  </form>
+				  
+			  </div>
+		  </div>
+	  </div>
+  </div>
+  
 	
-	<form action="deleteAccount.php" method="post" onsubmit="return confirm('Are you sure you want to Delete your account?');">
-		<div class="form-group text-right">					
-				<button class="btn btn-danger"/><i class="fa fa-trash-o fa-lg"></i> Delete Account</button>				
-		</div>
-		<!-- This input field is needed, to get the email of the user -->
-	    <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">   
-	</form>
+	
+	
+	
 	
 	
 	

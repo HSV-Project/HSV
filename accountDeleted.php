@@ -1,7 +1,11 @@
 <?php
-/* Displays all error messages */
+/* Log out process, unsets and destroys session variables */
 session_start();
+session_unset();
+session_destroy(); 
 ?>
+
+
 
 
 
@@ -17,7 +21,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Error</title>
+    <title>Log Out</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,31 +51,24 @@ session_start();
   <body>
 	<?php include 'header.php';?>
 	
-	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-12">
 				<div class="box">
-					<div class="form text-center">
+					  <div class="form text-center">
 
-						<h1 class="text-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error</h1>
-						<p>
-							<?php 
-							if( isset($_SESSION['message']) AND !empty($_SESSION['message']) ): 
-								echo $_SESSION['message'];    
-							else:
-								header( "location: index.php" );
-							endif;
-							?>
-						</p>     
-						<a href="index.php"><button class="button button-block btn-primary"/><i class="fa fa-home" aria-hidden="true"></i>Home</button></a>
-				  </div>
-			  </div>
-		  </div>
-	  </div>
-  </div>
-	
-	
+					  <h1 class="text-primary">Thanks for stopping by</h1>
+						  
+					  <p><?= "Your account has been deleted to create a new account go back to <a href='register.php'>Register</a>"; ?></p>
+					  
+					  <a href="index.php"><button class="btn btn-primary"/>Home</button></a>
+
+					  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	
 	<?php include 'footer.php';?>
    
