@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,26 +43,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6  col-md-offset-3">
-				<form action="customer-orders.html" method="post">
+				<form action="saveChanges.php" method="post">
 					<div class="form-group">
 						<label for="fName">First Name</label>
-						<input type="text" class="form-control" id="fname"placeholder="First name from the database">
+						<input type="text" class="form-control" id="fname" name="fname" placeholder="<?php echo $_SESSION["first_name"]?>">
 					</div>
 					<div class="form-group">
 						<label for="lName">Last Name</label>
-						<input type="text" class="form-control" id="lName" placeholder="Last Name from the database">
+						<input type="text" class="form-control" id="lName" name="lName" placeholder="<?php echo $_SESSION["last_name"]?>">
 					</div>
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="text" class="form-control" id="email" placeholder="Email from the database">
-					</div>
-					<div class="form-group text-left">					
-						<button type="button" class="btn btn-default">Change Password</button>					
-					</div>
-					<div class="form-group text-right">					
-						<span class="btn btn-danger" >
-						<i class="fa fa-trash-o fa-lg"></i> Delete Account</span>
-					</div>
+					
+					<!-- This input field is needed, to get the email of the user -->
+						  <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">    
 					<div class ="text-center">
 						<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>Save Changes</button>
 					</div>
@@ -66,6 +62,47 @@
 			</div>
 		</div>
 	</div>
+	
+	<hr>
+	
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6  col-md-offset-3">
+				<form action="changePassword.php" method="post">
+						  
+						  <div class="form-group">
+							<label for="pass">
+							  New Password<span class="req">*</span>
+							</label>
+							<input type="password"required class="form-control" name="newpassword" autocomplete="off" id="pass"/>
+						  </div>
+							  
+						  <div class="form-group">
+							<label for="confirm">
+							  Confirm New Password<span class="req">*</span>
+							</label>
+							<input type="password"required class="form-control" name="confirmpassword" autocomplete="off" id="confirm"/>
+						  </div> 
+							<!-- This input field is needed, to get the email of the user -->
+						  <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">   
+						 <div class="text-center"> 
+						  <button class="btn btn-primary"/><i class="fa fa-wrench" aria-hidden="true"></i>Change Password</button>
+						 </div>	
+			   </form>
+			</div>
+		</div>
+	</div>
+	
+	<form action="deleteAccount.php" method="post" onsubmit="return confirm('Are you sure you want to Delete your account?');">
+		<div class="form-group text-right">					
+				<button class="btn btn-danger"/><i class="fa fa-trash-o fa-lg"></i> Delete Account</button>				
+		</div>
+		<!-- This input field is needed, to get the email of the user -->
+	    <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">   
+	</form>
+	
 	
 	
 	<?php include 'footer.php';?>

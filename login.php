@@ -13,8 +13,15 @@ if ( $result->num_rows == 0 ){ // User doesn't exist
 else { // User exists
     $user = $result->fetch_assoc();
 	
+	
     if ( $user['password'] == md5($_POST['password']) ) { //password_verify($_POST['password'], $user['password'])
         
+		if($user['active']!=1){
+			$_SESSION['message'] = "You have not yet activated your account. Please verify using the link sent to ".$email;
+			header("location: error.php");
+		}
+		
+		else{
         $_SESSION['email'] = $user['email'];
         $_SESSION['first_name'] = $user['firstName'];
         $_SESSION['last_name'] = $user['lastName'];
@@ -26,6 +33,7 @@ else { // User exists
 		
 		
         header("location: index.php");
+		}
 		
     }
     else {

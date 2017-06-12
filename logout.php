@@ -61,7 +61,7 @@ session_destroy();
 						  
 					  <p><?= 'You have been logged out!'; ?></p>
 					  
-					  <a href="index.php"><button class="button button-block btn-primary"/>Home</button></a>
+					  <a href="index.php"><button class="btn btn-primary"/>Home</button></a>
 
 					  </div>
 				</div>

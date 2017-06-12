@@ -50,7 +50,7 @@ session_start();
 			<div class="col-md-12">
 				<div class="box">
 					<div class="form text-center">
-						<h1 class="text-primary">Success</h1>
+						<h1 class="text-primary"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Success</h1>
 						<p>
 						<?php 
 						if( isset($_SESSION['message']) AND !empty($_SESSION['message']) ){
@@ -60,7 +60,7 @@ session_start();
 						
 						?>
 						</p>
-						<a href="index.php"><button class="button button-block btn-primary"/><i class="fa fa-home" aria-hidden="true"></i>Home</button></a>
+						<a href="index.php"><button class="btn btn-primary"/><i class="fa fa-home" aria-hidden="true"></i>Home</button></a>
 					</div>
 				</div>
 			</div>

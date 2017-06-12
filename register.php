@@ -48,7 +48,7 @@
 		
 		elseif (isset($_POST['register'])) { //user registering
 			
-			require 'register.php';
+			require 'registerBackend.php';
 			
 		}
 	}
