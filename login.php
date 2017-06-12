@@ -8,7 +8,7 @@ $result = $mysqli->query("SELECT * FROM Users WHERE email='$email'");
 
 if ( $result->num_rows == 0 ){ // User doesn't exist
     $_SESSION['message'] = "User with that email doesn't exist!";
-    header("location: error.php");
+    header("loctaion: error.php");
 }
 else { // User exists
     $user = $result->fetch_assoc();
