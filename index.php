@@ -1,3 +1,4 @@
+
 <?php
 	require 'Database.php';
 	session_start();
@@ -123,6 +124,27 @@
 					  <h3 class="text-center">Electronics</h3>
 					</div>
 				  </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Become a seller -->
+	<div class="container <?php echo checkIfNotLoginOrSellerThenHide();?>">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="box">
+					<form action="makeHimSeller.php" method="post">
+						<div class="form-group">
+							<h3 class="text-center text-primary">Want to sell something!!!</h3>
+							<div class="text-center"> 
+							  <button class="btn btn-primary"/><i class="fa fa-odnoklassniki" aria-hidden="true"></i>Become a seller</button>
+							</div>	
+							<!-- This input field is needed, to get the email of the user -->
+						    <input type="hidden" name="email" value="<?= $_SESSION["email"] ?>">    
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

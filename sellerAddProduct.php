@@ -51,6 +51,13 @@
 							</label>
 							<input type="text"  class="form-control" name="productName" autocomplete="off" id="pName"/>
 						  </div>
+						  
+						  <div class="form-group">
+							<label for="category">
+							  Product category
+							</label>
+							<input type="text"  class="form-control" name="category" autocomplete="off" id="category"/>
+						  </div>
 							  
 						  <div class="form-group">
 							<label for="descLong">
