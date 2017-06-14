@@ -113,8 +113,16 @@
             <div class="navbar-buttons">
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
-					<a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Login to add to cart</span></a>
+                    <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm"><?php 
+					if(isset($_COOKIE["productInCart"] )){
+												$total=0;
+												$str = $_COOKIE["productInCart"];
+												$sets = explode(" ",$str);
+												echo count($sets); } 
+												else{
+													echo "0";
+												} ?> items in cart</span></a>
+					<!-- <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Login to add to cart</span></a> -->
                 </div>
                 <!--/.nav-collapse -->
 
