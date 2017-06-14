@@ -45,7 +45,7 @@
 
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a>
+                        <li><a href="index.php">Home</a>
                         </li>
                         <li>Shopping cart</li>
                     </ul>
@@ -58,7 +58,15 @@
                         <form method="post" action="checkout1.php">
 
                             <h1>Shopping cart</h1>
-                            <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                            <p class="text-muted">You currently have <?php 
+					if(isset($_COOKIE["productInCart"] )){
+												$total=0;
+												$str = $_COOKIE["productInCart"];
+												$sets = explode(" ",$str);
+												echo count($sets); } 
+												else{
+													echo "0";
+												} ?> item(s) in your cart.</p>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -74,13 +82,15 @@
 										<?php 
 											if(isset($_COOKIE["productInCart"] )){
 												$total=0;
+												$nthElement = 0;
 												$str = $_COOKIE["productInCart"];
 												$sets = explode(" ",$str);
 												foreach ($sets as $set){
-													$idAndQty = explode("*",$set);?>
+													$idAndQty = explode("*",$set);
+													$nthElement+=1; ?>
 									
 									
-													<tr>
+													<tr id=<?php echo $nthElement;?>>
 														<td>
 															<a href="#">
 																<img src=<?php echo getProductImg($idAndQty[0]);?> alt="White Blouse Armani">
@@ -89,11 +99,11 @@
 														<td><a href="#"><?php echo getProductName($idAndQty[0]);?></a>
 														</td>
 														<td>
-															<input type="number" max=<?php echo getProductQuantity($idAndQty[0]);?> value=<?php echo $idAndQty[1];?> class="form-control" onchange="recalculate()">
+															<input type="number" class="qty" max=<?php echo getProductQuantity($idAndQty[0]);?> value=<?php echo $idAndQty[1];?> class="form-control" onclick="recalculate(<?php echo $nthElement?>)">                                     
 														</td>
-														<td>$<?php echo getProductPrice($idAndQty[0]); ?></td> 
+														<td>$<span class = "unitPrice"><?php echo getProductPrice($idAndQty[0]); ?></span></td> 
 														<td>$0.00</td> 
-														<td>$<?php $total+=getProductPrice($idAndQty[0]) * $idAndQty[1];echo getProductPrice($idAndQty[0]) * $idAndQty[1]; ?></td> 
+														<td>$<span class="priceToCalculate"><?php $total+=getProductPrice($idAndQty[0]) * $idAndQty[1];echo getProductPrice($idAndQty[0]) * $idAndQty[1]; ?></span></td> 
 														<td><a href="#"><i class="fa fa-trash-o"></i></a>
 														</td>
 													</tr> 
@@ -107,13 +117,15 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th colspan="2">$<?php echo $total;?></th>
+                                            <th colspan="2" id="tableTotal">$<?php echo $total;?></th>
                                         </tr>
                                     </tfoot>
                                 </table>
 
                             </div>
                             <!-- /.table-responsive -->
+							
+							
 
                             <div class="box-footer">
                                 <div class="pull-left">
@@ -150,7 +162,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$<?php echo $total;?></th>
+                                        <th>$<span id="subTotal" ><?php echo $total;?></span></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -162,7 +174,7 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$<?php echo $total+10;?></th>
+                                        <th>$<span id="anotherTotal" ><?php echo $total+10;?></span></th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -217,5 +229,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/cart.js"></script>
   </body>
 </html>
