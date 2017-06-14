@@ -1,3 +1,4 @@
+
 <?php
     session_start();
     $productList=$_SESSION['productList'];
@@ -59,6 +60,8 @@
   <body>
 	<?php include 'header.php';?>
 	
+	
+	
 	<div class="container">
 		
 
@@ -83,17 +86,21 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="box">
-                                <h1 class="text-center"><?php echo $productName; ?></h1>
-                                <p class="goToDescription text-center"><a href="#details" class="scroll-to"><u>Scroll to product details</u></a>
-                                </p>
-                                <h2 class="price text-center">$<?php echo $productPrice; ?></h2>
-								
-								<p class="text-center text-primary"><strong>Select Quantity</strong></p>
-								<p class="text-center"><input type="number" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" /></p>
-								
-                                <p class="text-center buttons">
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>                                  
-                                </p>
+								<form action="setTheCookies.php" method="post">
+									<h1 class="text-center"><?php echo $productName; ?></h1>
+									<p class="goToDescription text-center"><a href="#details" class="scroll-to"><u>Scroll to product details</u></a>
+									</p>
+									<h2 class="price text-center">$<?php echo $productPrice; ?></h2>
+									
+									<p class="text-center text-primary"><strong>Select Quantity</strong></p>
+									<p class="text-center"><input type="number" value="1" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" name="qtyPurchased"/></p> 
+									<!-- This input field is needed, to get the product ID  -->
+									<input type="hidden" name="productId" value="<?= $productID ?>">   
+									<p class="text-center buttons">
+										<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+						                                  
+									</p>
+								</form>	
 
 
                             </div>

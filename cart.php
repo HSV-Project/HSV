@@ -1,3 +1,4 @@
+<?php require 'getProductInfo.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,45 +71,43 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="#">
-                                                    <img src="img/detailsquare.jpg" alt="White Blouse Armani">
-                                                </a>
-                                            </td>
-                                            <td><a href="#">White Blouse Armani</a>
-                                            </td>
-                                            <td>
-                                                <input type="number" value="2" class="form-control">
-                                            </td>
-                                            <td>$123.00</td>
-                                            <td>$0.00</td>
-                                            <td>$246.00</td>
-                                            <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="#">
-                                                    <img src="img/basketsquare.jpg" alt="Black Blouse Armani">
-                                                </a>
-                                            </td>
-                                            <td><a href="#">Black Blouse Armani</a>
-                                            </td>
-                                            <td>
-                                                <input type="number" value="1" class="form-control">
-                                            </td>
-                                            <td>$200.00</td>
-                                            <td>$0.00</td>
-                                            <td>$200.00</td>
-                                            <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                            </td>
-                                        </tr>
+										<?php 
+											if(isset($_COOKIE["productInCart"] )){
+												$total=0;
+												$str = $_COOKIE["productInCart"];
+												$sets = explode(" ",$str);
+												foreach ($sets as $set){
+													$idAndQty = explode("*",$set);?>
+									
+									
+													<tr>
+														<td>
+															<a href="#">
+																<img src=<?php echo getProductImg($idAndQty[0]);?> alt="White Blouse Armani">
+															</a>
+														</td>
+														<td><a href="#"><?php echo getProductName($idAndQty[0]);?></a>
+														</td>
+														<td>
+															<input type="number" max=<?php echo getProductQuantity($idAndQty[0]);?> value=<?php echo $idAndQty[1];?> class="form-control" onchange="recalculate()">
+														</td>
+														<td>$<?php echo getProductPrice($idAndQty[0]); ?></td> 
+														<td>$0.00</td> 
+														<td>$<?php $total+=getProductPrice($idAndQty[0]) * $idAndQty[1];echo getProductPrice($idAndQty[0]) * $idAndQty[1]; ?></td> 
+														<td><a href="#"><i class="fa fa-trash-o"></i></a>
+														</td>
+													</tr> 
+												<?php }	
+										
+											}
+										
+										?>
+                                        
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th colspan="2">$446.00</th>
+                                            <th colspan="2">$<?php echo $total;?></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -151,7 +150,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>$<?php echo $total;?></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -163,7 +162,7 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>$<?php echo $total+10;?></th>
                                     </tr>
                                 </tbody>
                             </table>
