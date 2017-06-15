@@ -8,16 +8,20 @@
 			$quantity= $_POST['qtyPurchased'];
 			
 			
-			$str = $productIDpassed .'*'. $quantity;
+			//$str = $productIDpassed .'*'. $quantity;
+			
 			if(isset($_COOKIE["productInCart"] )){
-			$str = " ".$str; 
+				//$str = " ".$str; 
+				$cookieArray = unserialize($_COOKIE["productInCart"]);
+				$cookieArray[$productIDpassed] = $quantity;
+				$cookieString = serialize($cookieArray);
+				setcookie("productInCart", $cookieString, time() + (86400 * 30), "/");
 			}
-				if(isset($_COOKIE["productInCart"] )){
-			setcookie("productInCart", $_COOKIE["productInCart"].=$str, time() + (86400 * 30), "/");
-				}
-				else{
-					setcookie("productInCart", $str, time() + (86400 * 30), "/");
-				}
+			else{
+				$cookieArray = array($productIDpassed=>$quantity);
+				$cookieString = serialize($cookieArray);
+				setcookie("productInCart", $cookieString, time() + (86400 * 30), "/");
+			}	
 		
 		header("location: cart.php");  
 		

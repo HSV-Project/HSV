@@ -1,4 +1,7 @@
-<?php require 'getProductInfo.php';?>
+<?php require 'getProductInfo.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +37,10 @@
   </head>
   
   <body>
-	<?php include 'header.php';?>
+	<?php include 'deleteFromCart.php';?>
+	<?php require 'header.php';?>
+	
+	
 	
 	
 	
@@ -60,10 +66,8 @@
                             <h1>Shopping cart</h1>
                             <p class="text-muted">You currently have <?php 
 					if(isset($_COOKIE["productInCart"] )){
-												$total=0;
-												$str = $_COOKIE["productInCart"];
-												$sets = explode(" ",$str);
-												echo count($sets); } 
+												echo count(unserialize($_COOKIE["productInCart"]));
+												} 
 												else{
 													echo "0";
 												} ?> item(s) in your cart.</p>
@@ -83,28 +87,28 @@
 											if(isset($_COOKIE["productInCart"] )){
 												$total=0;
 												$nthElement = 0;
-												$str = $_COOKIE["productInCart"];
-												$sets = explode(" ",$str);
-												foreach ($sets as $set){
-													$idAndQty = explode("*",$set);
+												$cookieAry = unserialize($_COOKIE["productInCart"]);
+												
+												foreach ($cookieAry as $prodId => $quantity){
+													
 													$nthElement+=1; ?>
 									
 									
 													<tr id=<?php echo $nthElement;?>>
 														<td>
 															<a href="#">
-																<img src=<?php echo getProductImg($idAndQty[0]);?> alt="White Blouse Armani">
+																<img src=<?php echo getProductImg($prodId);?> alt="White Blouse Armani">
 															</a>
 														</td>
-														<td><a href="#"><?php echo getProductName($idAndQty[0]);?></a>
+														<td><a href="#"><?php echo getProductName($prodId);?></a>
 														</td>
 														<td>
-															<input type="number" class="qty" max=<?php echo getProductQuantity($idAndQty[0]);?> value=<?php echo $idAndQty[1];?> class="form-control" onclick="recalculate(<?php echo $nthElement?>)">                                     
+															<input type="number" class="qty" max=<?php echo getProductQuantity($prodId);?> value=<?php echo $quantity;?> class="form-control" onclick="recalculate(<?php echo $nthElement?>)">                                     
 														</td>
-														<td>$<span class = "unitPrice"><?php echo getProductPrice($idAndQty[0]); ?></span></td> 
+														<td>$<span class = "unitPrice"><?php echo getProductPrice($prodId); ?></span></td> 
 														<td>$0.00</td> 
-														<td>$<span class="priceToCalculate"><?php $total+=getProductPrice($idAndQty[0]) * $idAndQty[1];echo getProductPrice($idAndQty[0]) * $idAndQty[1]; ?></span></td> 
-														<td><a href="#"><i class="fa fa-trash-o"></i></a>
+														<td>$<span class="priceToCalculate"><?php $total+=getProductPrice($prodId) * $quantity;echo getProductPrice($prodId) * $quantity; ?></span></td> 
+														<td><a href="cart.php?productId=<?php echo $prodId;?>"><i class="fa fa-trash-o"></i></a>
 														</td>
 													</tr> 
 												<?php }	
@@ -117,7 +121,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th colspan="2" id="tableTotal">$<?php echo $total;?></th>
+                                            <th colspan="2" id="tableTotal">$<?php if(isset($_COOKIE['productInCart'])){echo $total;}?></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -162,7 +166,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$<span id="subTotal" ><?php echo $total;?></span></th>
+                                        <th>$<span id="subTotal" ><?php if(isset($_COOKIE['productInCart'])){echo $total;}?></span></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -172,9 +176,13 @@
                                         <td>Tax</td>
                                         <th>$0.00</th>
                                     </tr>
+									<tr>
+                                        <td><?php if(isset($_SESSION['first_name'])){echo "offer of the day";} else{echo "Login to avail offers";}?></td>
+                                        <th>-$<?php if(isset($_SESSION["offer"])&& $total>50){echo .35*$total;}else{echo "Total less than $50";}?></th>
+                                    </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$<span id="anotherTotal" ><?php echo $total+10;?></span></th>
+                                        <th>$<span id="anotherTotal" ><?php if(isset($_COOKIE['productInCart'])){if(isset($_SESSION["offer"])&& $total>50){echo $total-(.35*$total)+10;}else{echo $total+10;}}?></span></th>
                                     </tr>
                                 </tbody>
                             </table>
