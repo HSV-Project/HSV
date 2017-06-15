@@ -61,7 +61,7 @@ session_start();
 
                     <div class="box">
 
-                        <form method="post" action="checkout1.php">
+                        <form method="POST" action="checkout1.php">
 
                             <h1>Shopping cart</h1>
                             <p class="text-muted">You currently have <?php 
@@ -120,12 +120,12 @@ session_start();
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="5">Total</th>
-                                            <th colspan="2" id="tableTotal">$<?php if(isset($_COOKIE['productInCart'])){echo $total;}?></th>
+                                            <th colspan="5" >Total</th>
+                                            <th colspan="2" id="tableTotal" >$<?php if(isset($_COOKIE['productInCart'])){echo $total;}?></th>
                                         </tr>
                                     </tfoot>
                                 </table>
-
+								
                             </div>
                             <!-- /.table-responsive -->
 							
@@ -136,13 +136,13 @@ session_start();
                                     <a href="index.php" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                                 </div>
                                 <div class="pull-right">
-                                    <button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>
+                                    <!--<button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>-->
                                     <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
                                     </button>
                                 </div>
                             </div>
 
-                        </form>
+                        
 
                     </div>
                     <!-- /.box -->
@@ -178,19 +178,29 @@ session_start();
                                     </tr>
 									<tr>
                                         <td><?php if(isset($_SESSION['first_name'])){echo "offer of the day";} else{echo "Login to avail offers";}?></td>
-                                        <th>-$<?php if(isset($_SESSION["offer"])&& $total>50){echo .35*$total;}else{echo "Total less than $50";}?></th>
+                                        <th>-$<?php if(isset($_SESSION["offer"])){
+												if($total>50){											
+												echo .35*$total;
+												}
+												else{
+													echo "Total less than $50";
+													}
+											}?></th>
                                     </tr>
+									
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$<span id="anotherTotal" ><?php if(isset($_COOKIE['productInCart'])){if(isset($_SESSION["offer"])&& $total>50){echo $total-(.35*$total)+10;}else{echo $total+10;}}?></span></th>
+										<?php if(isset($_COOKIE['productInCart'])){if(isset($_SESSION["offer"])&& $total>50){$finalTotal = $total-(.35*$total)+10;}else{$finalTotal = $total+10;}}?>
+                                        <th>$<span id="anotherTotal"  ><?php echo $finalTotal?></span></th>
                                     </tr>
+									<input type="text" class="hidden" value=<?php echo $finalTotal;?> name="total">
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
 
-
+</form>
                     <div class="box">
                         <div class="box-header">
                             <h4>Coupon code</h4>

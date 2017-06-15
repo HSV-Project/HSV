@@ -1,3 +1,11 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	print_r($_POST);
+	if(isset($_POST["total"])){
+	 $total = $_POST["total"];	 
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -169,7 +177,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>$<?php echo $total-10;?></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -181,8 +189,9 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>$<?php echo $total;?></th>
                                     </tr>
+									<input type="text" class="hidden" value=<?php echo $total;?> name="total">
                                 </tbody>
                             </table>
                         </div>

@@ -6,7 +6,10 @@
 	<div id="top">
         <div class="container">
             <div class="col-md-5 offer  <?php echo checkIfNotLoginThenHide();?>" data-animate="fadeInDown">
-                <a href="index.php?offerID=1" class="btn btn-primary" data-animate-hover="shake"> Offer of the day </a><span>Get flat 35% off on orders over $50!</span>
+                <a href="index.php?offerID=1" class="btn btn-primary" data-animate-hover="shake"><?php if(isset($_SESSION["offer"])){echo "Offer Activated";}else{echo "Offer of the day";}?>  </a><span>Get flat 35% off on orders over $50!</span>
+            </div>
+			<div class="col-md-5 offer  <?php echo checkIfLoginThenHide();?>" data-animate="fadeInDown">
+                <span  class="lookLikeButton" data-animate-hover="shake">Login to get exciting daily offers!!</span>
             </div>
             <div class="col-md-7<?php if(!isset($_SESSION['first_name'])){echo "col-md-offset-5";}?>" data-animate="fadeInDown">
                 <ul class="menu">
