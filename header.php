@@ -1,4 +1,4 @@
-<?php include 'checkIfLogin.php';?>
+<?php include 'checkIfLogin.php'; ?>
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
    
@@ -102,6 +102,8 @@
 				<ul class="nav navbar-nav navbar-left">
                     <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="sellerAddProduct.php">Add Product</a> <!--class="active"-->
                     </li>
+                    <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="productList.php?user=seller">My Products</a> <!--class="active"-->
+                    </li>
 				</ul>
 
                     
@@ -129,12 +131,12 @@
 
             <div class="collapse clearfix" id="search">
 
-                <form class="navbar-form" role="search">
+                <form action="productList.php" method="post" class="navbar-form" role="search" >
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" name="search" class="form-control" placeholder="Search"/>
                         <span class="input-group-btn">
 
-			<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+			<button type="submit" name="search_button" class="btn btn-primary"><i class="fa fa-search"></i></button>
 
 		    </span>
                     </div>

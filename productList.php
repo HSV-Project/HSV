@@ -1,9 +1,23 @@
 <?php 
 
-include 'departmentProductList.php'; 
+include 'productListBackend.php'; 
 session_start();
-$department=$_GET['department'];
-$productList=get_products($department);
+if (isset($_GET['department']) && !empty($_GET['department'])) {
+    $department = $_GET['department'];
+    $productList = get_products_byDepartment($department);
+} elseif (isset($_GET['user']) && !empty($_GET['user'])) {
+    $user = $_GET['user'];
+    if (isset($_SESSION['userID']) && !empty($_SESSION['userID']))
+        $userId = $_SESSION['userID'];
+    $productList = get_products_bySeller($userId);
+}
+elseif(isset($_POST['search']) && !empty ($_POST['search'])){
+    $search=$_POST['search'];
+    $productList=get_products_bySearch($search);
+}
+ else {
+     $productList=array();
+ }
 $_SESSION['productList']=$productList;
 //echo count($productList);
 
@@ -67,7 +81,11 @@ $_SESSION['productList']=$productList;
                             ?>
 			<div class="panel panel-default">
 				<div class="row">
+                                    <?php if(isset($_GET['user'])) { ?>
+                                    <a href="sellerEditProduct.php?productId=<?php echo $productID; ?>">
+                                    <?php } else{ ?>
                                     <a href="productDetail.php?productId=<?php echo $productID; ?>">
+                                    <?php } ?>
 						<div class="col-md-1">
 						</div>
 						<div class="col-md-2">
@@ -77,7 +95,10 @@ $_SESSION['productList']=$productList;
 							<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo $productName ?><span></p>
 							<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo $productDescShort ?></span></p>
 							<p><strong class="text-primary">Cost:</strong><span class="text-success"> $<?php echo $productPrice ?></span></p>
+                                                        <p><strong class="text-primary">Department:</strong><span class="text-success"> <?php echo $productCategory ?></span></p>
+                                                        <?php if(!isset($_GET['user'])) { ?>
                                                         <p><span class="text-success"><strong>Get it in the next 5 days</strong></span></p>
+                                                        <?php } ?>
 						</div>
 					</a>
 					

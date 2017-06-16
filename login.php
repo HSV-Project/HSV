@@ -22,11 +22,13 @@ else { // User exists
 		}
 		
 		else{
+                    error_log("userid:".$user['userID']);
+        $_SESSION['userID'] = $user['userID'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['first_name'] = $user['firstName'];
         $_SESSION['last_name'] = $user['lastName'];
         $_SESSION['active'] = $user['active'];
-		$_SESSION['seller'] = $user['seller'];
+	$_SESSION['seller'] = $user['seller'];
         
         // This is how we'll know the user is logged in
         $_SESSION['logged_in'] = true;

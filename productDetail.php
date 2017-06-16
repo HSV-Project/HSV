@@ -1,6 +1,7 @@
 <?php
     session_start();
     $productList=$_SESSION['productList'];
+    
     $productIDpassed=$_GET['productId'];
     //$department=$_GET['department'];
 
@@ -89,7 +90,7 @@
                                 <h2 class="price text-center">$<?php echo $productPrice; ?></h2>
 								
 								<p class="text-center text-primary"><strong>Select Quantity</strong></p>
-								<p class="text-center"><input type="number" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" /></p>
+								<p class="text-center"><input type="number" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" value="1" /></p>
 								
                                 <p class="text-center buttons">
                                     <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>                                  
