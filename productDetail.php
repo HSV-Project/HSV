@@ -1,4 +1,4 @@
-
+<?php require 'checkInCart.php' ?>
 <?php
     session_start();
     $productList=$_SESSION['productList'];
@@ -92,13 +92,13 @@
 									</p>
 									<h2 class="price text-center">$<?php echo $productPrice; ?></h2>
 									
-									<p class="text-center text-primary"><strong>Select Quantity</strong></p>
-									<p class="text-center"><input type="number" value="1" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" name="qtyPurchased"/></p> 
+									<p class="text-center text-primary <?php echo checkIfAlreadyInCartThenHide($productID);?>"><strong>Select Quantity</strong></p>
+									<p class="text-center <?php echo checkIfAlreadyInCartThenHide($productID);?>"><input type="number" value="1" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" name="qtyPurchased"/></p> 
 									<!-- This input field is needed, to get the product ID  -->
 									<input type="hidden" name="productId" value="<?= $productID ?>">   
 									<p class="text-center buttons">
-										<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-						                                  
+										<button type="submit" class="btn btn-primary <?php echo checkIfAlreadyInCartThenHide($productID);?>"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+						                <a href="cart.php" type="submit" class="btn btn-primary <?php echo checkIfNotInCartThenHide($productID);?>"><i class="fa fa-shopping-cart"></i>Go to cart</a>                  
 									</p>
 								</form>	
 
