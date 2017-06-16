@@ -1,3 +1,40 @@
+<?php require "Database.php";
+session_start();?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if(isset($_SESSION['id'])){
+	//print_r($_POST);
+	if(isset($_POST["total"])){
+	 $total = $_POST["total"];		
+	}
+	
+	$AddL1 = $_POST['Add1'];
+	$AddL2 = $_POST['Add2'];	
+	$apt = $_POST['Apt'];	
+	$zip = $_POST['zip'];	
+	$city = $_POST['city'];	
+	$state = $_POST['state'];	
+	$Telephone = $_POST['phone'];	
+	
+	$id = $_SESSION['id'];
+	$sql = "SELECT * FROM addressCreditCard WHERE userId='$id'";
+	$result = $mysqli->query($sql);
+	
+	//update
+	if ( $result->num_rows > 0 ){
+		$sql = "UPDATE addressCreditCard SET addressLine1='$AddL1', addressLine2 ='$AddL2', apt='$apt', zip='$zip', city='$city', state='$state', phone='$Telephone' WHERE userId='$id'";
+		$mysqli->query($sql);
+	}
+	//add
+	else{
+		$sql = "INSERT INTO addressCreditCard(userId,addressLine1,addressLine2,apt,zip,city,state,phone) VALUES('$id','$AddL1','$AddL2','$apt','$zip','$city','$state','$Telephone')  ";
+		$mysqli->query($sql);
+	}
+	
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,7 +105,7 @@
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>USPS Next Day</h4>
+                                            <h4>fedx Next Day</h4>
 
                                             <p>Get it right on next day - fastest option possible.</p>
 
@@ -81,7 +118,8 @@
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>USPS Next Day</h4>
+                                            <h4>Buldart Next Day</h4>
+                                            <h4>Bule Next Day</h4>
 
                                             <p>Get it right on next day - fastest option possible.</p>
 
@@ -95,9 +133,9 @@
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>USPS Next Day</h4>
+                                            <h4>USPS </h4>
 
-                                            <p>Get it right on next day - fastest option possible.</p>
+                                            <p>Get it right on next week .</p>
 
                                             <div class="box-footer text-center">
 
@@ -141,7 +179,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>$<?php echo $total-10;?></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -153,7 +191,7 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>$<?php echo $total;?></th>
                                     </tr>
                                 </tbody>
                             </table>

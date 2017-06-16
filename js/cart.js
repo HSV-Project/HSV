@@ -45,7 +45,7 @@ function doThing(rowId, product_id){
                 //document.getElementById("test").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("POST", "cookieModificationOnMovingToCheckout.php?pID=" +product_id +"&qty="+ qty, true);
+        xmlhttp.open("POST", "cookieModificationOnMovingToCheckout.php?pID=" +product_id +"&qty="+ qty, false);
         xmlhttp.send();
 	
 }

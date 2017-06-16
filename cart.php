@@ -147,7 +147,7 @@ session_start();
 
                     </div>
                     <!-- /.box -->
-					<span id="test">TEST</span>
+					
 
                     
 

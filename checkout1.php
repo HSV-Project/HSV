@@ -1,4 +1,8 @@
 <?php
+require 'Database.php';
+session_start();
+?>
+<?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	//print_r($_POST);
 	if(isset($_POST["total"])){
@@ -6,6 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 ?>
+
+
+<?php require 'address.php'?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a>
+                        <li><a href="index.php">Home</a>
                         </li>
                         <li>Checkout - Address</li>
                     </ul>
@@ -76,13 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="firstname">Firstname</label>
-                                            <input type="text" class="form-control" id="firstname">
+                                            <input type="text" class="form-control" id="firstname" value="<?php if(isset($_SESSION['email'])){echo $_SESSION["first_name"];}?>">                            
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="lastname">Lastname</label>
-                                            <input type="text" class="form-control" id="lastname">
+                                            <input type="text" class="form-control" id="lastname" value="<?php if(isset($_SESSION['email'])){echo $_SESSION["last_name"];}?>">
                                         </div>
                                     </div>
                                 </div>
@@ -91,14 +100,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="company">Company</label>
-                                            <input type="text" class="form-control" id="company">
+                                            <label for="Add1">Address Line 1</label>
+                                            <input type="text" class="form-control" name="Add1" id="Add1" value="<?php echo $AddL1;?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="street">Street</label>
-                                            <input type="text" class="form-control" id="street">
+                                            <label for="Add2">Address Line 2</label>
+                                            <input type="text" class="form-control" name="Add2" id="Add2" value="<?php echo $AddL2;?>">
                                         </div>
                                     </div>
                                 </div>
@@ -107,39 +116,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="row">
                                     <div class="col-sm-6 col-md-3">
                                         <div class="form-group">
-                                            <label for="city">Company</label>
-                                            <input type="text" class="form-control" id="city">
+                                            <label for="Apt">Apt</label>
+                                            <input type="text" class="form-control" name="Apt" id="Apt" value="<?php echo $apt;?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-3">
                                         <div class="form-group">
                                             <label for="zip">ZIP</label>
-                                            <input type="text" class="form-control" id="zip">
+                                            <input type="text" class="form-control" name="zip" id="zip" value="<?php echo $zip;?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="city">City</label>
+                                            <input type="text" class="form-control" name="city" id="city" value="<?php echo $city;?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-3">
                                         <div class="form-group">
                                             <label for="state">State</label>
-                                            <select class="form-control" id="state"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="form-group">
-                                            <label for="country">Country</label>
-                                            <select class="form-control" id="country"></select>
+                                            <input type="text" class="form-control" name="state"  id="state" value="<?php echo $state?>">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="phone">Telephone</label>
-                                            <input type="text" class="form-control" id="phone">
+                                            <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $Telephone?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email">
+                                            <input type="text" class="form-control" id="email" value="<?php if(isset($_SESSION['email'])){echo $_SESSION["email"];}?>">
                                         </div>
                                     </div>
 
@@ -151,11 +160,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="pull-left">
                                     <a href="cart.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to cart</a>
                                 </div>
+								<input type="text" class="hidden" value=<?php echo $total;?> name="total">
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
                                     </button>
                                 </div>
                             </div>
+							
                         </form>
                     </div>
                     <!-- /.box -->
@@ -191,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <td>Total</td>
                                         <th>$<?php echo $total;?></th>
                                     </tr>
-									<input type="text" class="hidden" value=<?php echo $total;?> name="total">
+									
                                 </tbody>
                             </table>
                         </div>
