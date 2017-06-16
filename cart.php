@@ -103,14 +103,15 @@ session_start();
 														<td><a href="#"><?php echo getProductName($prodId);?></a>
 														</td>
 														<td>
-															<input type="number" class="qty" max=<?php echo getProductQuantity($prodId);?> value=<?php echo $quantity;?> class="form-control" onclick="recalculate(<?php echo $nthElement?>)">                                     
+															<input type="number" class="qty" max=<?php echo getProductQuantity($prodId);?> value=<?php echo $quantity;?> class="form-control" onclick="recalculate(<?php echo $nthElement;?>,<?php echo $prodId;?>)">                                     
 														</td>
 														<td>$<span class = "unitPrice"><?php echo getProductPrice($prodId); ?></span></td> 
 														<td>$0.00</td> 
 														<td>$<span class="priceToCalculate"><?php $total+=getProductPrice($prodId) * $quantity;echo getProductPrice($prodId) * $quantity; ?></span></td> 
 														<td><a href="cart.php?productId=<?php echo $prodId;?>"><i class="fa fa-trash-o"></i></a>
 														</td>
-													</tr> 
+													</tr>
+													
 												<?php }	
 										
 											}
@@ -146,7 +147,7 @@ session_start();
 
                     </div>
                     <!-- /.box -->
-
+					<span id="test">TEST</span>
 
                     
 
