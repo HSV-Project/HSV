@@ -69,7 +69,7 @@ if(isset($_SESSION['id'])){
 							<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo $row['productDescShort'];?></span></p>
 							<p><strong class="text-primary">Quantity Purchased:</strong><span class="text-success"><?php echo $row['quantityPurchased'];?></span></p>
 							<p><strong class="text-primary">Cost:</strong><span class="text-success"><?php echo $row['productPrice'];?></span></p>
-							<p><strong class="text-primary">Purchase Date:</strong><span class="text-success">2/7/2016</span></p>					
+							<p><strong class="text-primary">Purchase Date and Time:</strong><span class="text-success"><?php echo $row['dateTimePurchased'];?></span></p>					
 						</div>
 					</a>
 						<div class="col-md-2">
