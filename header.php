@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-<?php include 'checkIfLogin.php'; ?>
-=======
+
 <?php require 'checkIfLogin.php';?>
 <?php require 'activateOfferOfTheDay.php';?>
->>>>>>> 36337b68238cd4c1c39f90b5efb872c0ae0cac6d
+
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
    
