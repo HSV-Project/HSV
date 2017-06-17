@@ -91,7 +91,7 @@ $_SESSION['productList']=$productList;
 						<div class="col-md-2">
 							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books" width="110" >
 						</div>
-						<div class="col-md-7">
+						<div class="col-md-9">
 							<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo $productName ?><span></p>
 							<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo $productDescShort ?></span></p>
 							<p><strong class="text-primary">Cost:</strong><span class="text-success"> $<?php echo $productPrice ?></span></p>

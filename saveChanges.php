@@ -7,7 +7,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
     // Make sure the two passwords match
-    if ( $_POST['newpassword'] == $_POST['confirmpassword'] ) { 
+    if ( $_POST['fname'] != "" || $_POST['lName'] != "") { 
 
         $new_password = md5($_POST['newpassword']);//password_hash($_POST['newpassword'], PASSWORD_BCRYPT);
         
@@ -19,6 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$new_lastName = $mysqli->escape_string($_POST['lName']);
         
         $sql = "UPDATE Users SET firstName ='$new_firstName', lastName='$new_lastName'   WHERE email='$email'";
+		if ($_POST['fname'] == ""){
+			$sql = "UPDATE Users SET  lastName='$new_lastName'   WHERE email='$email'";
+		}
+		if ($_POST['lName'] == ""){
+			$sql = "UPDATE Users SET  firstName ='$new_firstName'   WHERE email='$email'";
+		}
 
         if ( $mysqli->query($sql) ) {
 
@@ -29,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
     else {
-        $_SESSION['message'] = "Two passwords you entered don't match, try again!";
+        $_SESSION['message'] = "First name and last name cannot be empty";
         header("location: error.php");    
     }
 
