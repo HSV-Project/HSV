@@ -1,3 +1,41 @@
+<?php require "Database.php";
+session_start();?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if(isset($_POST["total"])){
+		 $total = $_POST["total"];		
+		}
+	
+	if(isset($_SESSION['id'])){
+		//print_r($_POST);
+		
+		
+		$AddL1 = $_POST['Add1'];
+		$AddL2 = $_POST['Add2'];	
+		$apt = $_POST['Apt'];	
+		$zip = $_POST['zip'];	
+		$city = $_POST['city'];	
+		$state = $_POST['state'];	
+		$Telephone = $_POST['phone'];	
+		
+		$id = $_SESSION['id'];
+		$sql = "SELECT * FROM addressCreditCard WHERE userId='$id'";
+		$result = $mysqli->query($sql);
+		
+		//update
+		if ( $result->num_rows > 0 ){
+			$sql = "UPDATE addressCreditCard SET addressLine1='$AddL1', addressLine2 ='$AddL2', apt='$apt', zip='$zip', city='$city', state='$state', phone='$Telephone' WHERE userId='$id'";
+			$mysqli->query($sql);
+		}
+		//add
+		else{
+			$sql = "INSERT INTO addressCreditCard(userId,addressLine1,addressLine2,apt,zip,city,state,phone) VALUES('$id','$AddL1','$AddL2','$apt','$zip','$city','$state','$Telephone')  ";
+			$mysqli->query($sql);
+		}		
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,7 +88,7 @@
                 <div class="col-md-9" id="checkout">
 
                     <div class="box">
-                        <form method="post" action="checkout3.php">
+                        <form method="POST" action="checkout3.php">
                             <h1>Checkout - Delivery method</h1>
                             <ul class="nav nav-pills nav-justified">
                                 <li><a href="checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
@@ -68,7 +106,7 @@
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>USPS Next Day</h4>
+                                            <h4>fedex Next Day</h4>
 
                                             <p>Get it right on next day - fastest option possible.</p>
 
@@ -81,7 +119,8 @@
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>USPS Next Day</h4>
+                                            <h4>Buledart Next Day</h4>
+                                            <h4>Bule Next Day</h4>
 
                                             <p>Get it right on next day - fastest option possible.</p>
 
@@ -95,9 +134,9 @@
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>USPS Next Day</h4>
+                                            <h4>USPS </h4>
 
-                                            <p>Get it right on next day - fastest option possible.</p>
+                                            <p>Get it right on next week .</p>
 
                                             <div class="box-footer text-center">
 
@@ -112,15 +151,23 @@
                             <!-- /.content -->
 
                             <div class="box-footer">
-                                <div class="pull-left">
-                                    <a href="checkout1.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Addresses</a>
-                                </div>
+							<input type="text" class="hidden" value=<?php echo $total;?> name="total">
+                                
+								
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Continue to Payment Method<i class="fa fa-chevron-right"></i>
                                     </button>
                                 </div>
-                            </div>
+                            
                         </form>
+						<form method="post" action="checkout1.php">
+							<input type="text" class="hidden" value=<?php echo $total;?> name="total">
+							<div class="pull-left">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Addresses
+                                    </button>
+                            </div>
+						</form>
+						</div>
                     </div>
                     <!-- /.box -->
 
@@ -141,7 +188,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>$<?php echo $total-10;?></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -153,7 +200,7 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>$<?php echo $total;?></th>
                                     </tr>
                                 </tbody>
                             </table>

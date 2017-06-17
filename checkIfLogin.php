@@ -32,6 +32,21 @@ function checkIfNotSellerThenHide(){
 	else{
 		return "";
 	}
+}	
 	
-}
+	
+	
+function checkIfNotLoginOrSellerThenHide(){
+	if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false || $_SESSION['active']==0){
+		return "hidden";
+	}
+	elseif($_SESSION['seller']==1 ){
+		return "hidden";
+	}
+	else{
+		return "";
+	}
+}	
+	
+
 ?>

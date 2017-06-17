@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 <?php include 'checkIfLogin.php'; ?>
+=======
+<?php require 'checkIfLogin.php';?>
+<?php require 'activateOfferOfTheDay.php';?>
+>>>>>>> 36337b68238cd4c1c39f90b5efb872c0ae0cac6d
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
    
 	<div id="top">
         <div class="container">
-            <div class="col-md-5 offer" data-animate="fadeInDown">
-                <span  class="lookLikeButton" data-animate-hover="shake"> Offer of the day </span><span>Get flat 35% off on orders over $50!</span>
+            <div class="col-md-5 offer  <?php echo checkIfNotLoginThenHide();?>" data-animate="fadeInDown">
+                <a href="index.php?offerID=1" class="btn btn-primary" data-animate-hover="shake"><?php if(isset($_SESSION["offer"])){echo "Offer Activated";}else{echo "Offer of the day";}?>  </a><span>Get flat 35% off on orders over $50!</span>
             </div>
-            <div class="col-md-7" data-animate="fadeInDown">
+			<div class="col-md-5 offer  <?php echo checkIfLoginThenHide();?>" data-animate="fadeInDown">
+                <span  class="lookLikeButton" data-animate-hover="shake">Login to get exciting daily offers!!</span>
+            </div>
+            <div class="col-md-7<?php if(!isset($_SESSION['first_name'])){echo "col-md-offset-5";}?>" data-animate="fadeInDown">
                 <ul class="menu">
                     <li class="<?php echo checkIfLoginThenHide();?>"><a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-user" aria-hidden="true"></i>Login</a> <!--class="hidden"-->
                     </li>
@@ -23,6 +31,8 @@
 					</li>						
                 </ul>
             </div>
+			<div class="col-md-2 col-md-offset-10 text-primary"><?php  if(isset($_SESSION['first_name'])){ echo "Hi, ".$_SESSION['first_name'];}?></div>
+			
         </div>
         <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
             <div class="modal-dialog modal-sm">
@@ -115,8 +125,14 @@
             <div class="navbar-buttons">
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
-					<a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Login to add to cart</span></a>
+                    <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm"><?php 
+					if(isset($_COOKIE["productInCart"] )){
+												echo count(unserialize($_COOKIE["productInCart"]));
+												} 
+												else{
+													echo "0";
+												} ?> items in cart</span></a>
+					<!-- <a href="cart.php" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Login to add to cart</span></a> -->
                 </div>
                 <!--/.nav-collapse -->
 
