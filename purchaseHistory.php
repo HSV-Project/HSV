@@ -20,6 +20,7 @@
     <link href="bootstrap/css/templatecss/owl.theme.css" rel="stylesheet">
 
     <!-- theme stylesheet -->
+	<!-- theme stylesheet -->
     <link href="bootstrap/css/templatecss/style.default.css" rel="stylesheet" id="theme-stylesheet">
 
     <!-- your stylesheet with modifications -->
