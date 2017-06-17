@@ -3,36 +3,37 @@ session_start();?>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	if(isset($_SESSION['id'])){
-	//print_r($_POST);
 	if(isset($_POST["total"])){
-	 $total = $_POST["total"];		
+		 $total = $_POST["total"];		
+		}
+	
+	if(isset($_SESSION['id'])){
+		//print_r($_POST);
+		
+		
+		$AddL1 = $_POST['Add1'];
+		$AddL2 = $_POST['Add2'];	
+		$apt = $_POST['Apt'];	
+		$zip = $_POST['zip'];	
+		$city = $_POST['city'];	
+		$state = $_POST['state'];	
+		$Telephone = $_POST['phone'];	
+		
+		$id = $_SESSION['id'];
+		$sql = "SELECT * FROM addressCreditCard WHERE userId='$id'";
+		$result = $mysqli->query($sql);
+		
+		//update
+		if ( $result->num_rows > 0 ){
+			$sql = "UPDATE addressCreditCard SET addressLine1='$AddL1', addressLine2 ='$AddL2', apt='$apt', zip='$zip', city='$city', state='$state', phone='$Telephone' WHERE userId='$id'";
+			$mysqli->query($sql);
+		}
+		//add
+		else{
+			$sql = "INSERT INTO addressCreditCard(userId,addressLine1,addressLine2,apt,zip,city,state,phone) VALUES('$id','$AddL1','$AddL2','$apt','$zip','$city','$state','$Telephone')  ";
+			$mysqli->query($sql);
+		}		
 	}
-	
-	$AddL1 = $_POST['Add1'];
-	$AddL2 = $_POST['Add2'];	
-	$apt = $_POST['Apt'];	
-	$zip = $_POST['zip'];	
-	$city = $_POST['city'];	
-	$state = $_POST['state'];	
-	$Telephone = $_POST['phone'];	
-	
-	$id = $_SESSION['id'];
-	$sql = "SELECT * FROM addressCreditCard WHERE userId='$id'";
-	$result = $mysqli->query($sql);
-	
-	//update
-	if ( $result->num_rows > 0 ){
-		$sql = "UPDATE addressCreditCard SET addressLine1='$AddL1', addressLine2 ='$AddL2', apt='$apt', zip='$zip', city='$city', state='$state', phone='$Telephone' WHERE userId='$id'";
-		$mysqli->query($sql);
-	}
-	//add
-	else{
-		$sql = "INSERT INTO addressCreditCard(userId,addressLine1,addressLine2,apt,zip,city,state,phone) VALUES('$id','$AddL1','$AddL2','$apt','$zip','$city','$state','$Telephone')  ";
-		$mysqli->query($sql);
-	}
-	
-}
 }
 ?>
 <!DOCTYPE html>
@@ -87,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-9" id="checkout">
 
                     <div class="box">
-                        <form method="post" action="checkout3.php">
+                        <form method="POST" action="checkout3.php">
                             <h1>Checkout - Delivery method</h1>
                             <ul class="nav nav-pills nav-justified">
                                 <li><a href="checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
@@ -105,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>fedx Next Day</h4>
+                                            <h4>fedex Next Day</h4>
 
                                             <p>Get it right on next day - fastest option possible.</p>
 
@@ -118,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="col-sm-6">
                                         <div class="box shipping-method">
 
-                                            <h4>Buldart Next Day</h4>
+                                            <h4>Buledart Next Day</h4>
                                             <h4>Bule Next Day</h4>
 
                                             <p>Get it right on next day - fastest option possible.</p>
@@ -150,15 +151,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <!-- /.content -->
 
                             <div class="box-footer">
-                                <div class="pull-left">
-                                    <a href="checkout1.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Addresses</a>
-                                </div>
+							<input type="text" class="hidden" value=<?php echo $total;?> name="total">
+                                
+								
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Continue to Payment Method<i class="fa fa-chevron-right"></i>
                                     </button>
                                 </div>
-                            </div>
+                            
                         </form>
+						<form method="post" action="checkout1.php">
+							<input type="text" class="hidden" value=<?php echo $total;?> name="total">
+							<div class="pull-left">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Addresses
+                                    </button>
+                            </div>
+						</form>
+						</div>
                     </div>
                     <!-- /.box -->
 

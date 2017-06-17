@@ -1,3 +1,15 @@
+<?php require "Database.php";
+session_start();?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	//print_r($_POST);
+	if(isset($_POST["total"])){
+		 $total = $_POST["total"];		
+		}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -110,17 +122,24 @@
 
                             </div>
                             <!-- /.content -->
-
+							<input type="text" class="hidden" value=<?php echo $total;?> name="total">
                             <div class="box-footer">
-                                <div class="pull-left">
-                                    <a href="checkout2.php" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Delivery Method</a>
-                                </div>
+                     
+								
                                 <div class="pull-right">
                                     <button type="submit" class="btn btn-primary">Continue to Order review<i class="fa fa-chevron-right"></i>
                                     </button>
                                 </div>
-                            </div>
+                            
                         </form>
+						<form method="post" action="checkout2.php">
+							<input type="text" class="hidden" value=<?php echo $total;?> name="total">
+							<div class="pull-left">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Delivery Method
+                                    </button>
+                            </div>
+						</form>
+						</div>
                     </div>
                     <!-- /.box -->
 
@@ -141,7 +160,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>$<?php echo $total-10;?></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -153,7 +172,7 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>$<?php echo $total;?></th>
                                     </tr>
                                 </tbody>
                             </table>

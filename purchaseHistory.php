@@ -1,3 +1,17 @@
+<?php
+require 'Database.php';
+session_start();
+
+if(isset($_SESSION['id'])){
+	$userId = $_SESSION['id'];
+	$sql = "SELECT * FROM purchaseHistory, Inventory where purchaseHistory.productId = Inventory.productID AND purchaseHistory.userId ='$userId' ";
+	$result = $mysqli->query($sql);
+	//$productInPurchaseHistory = $result->fetch_assoc();
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,19 +51,24 @@
 	
 	<div class="container">
 		 <div class="panel-group">
-			<div class="panel panel-default">
+			
+			<?php
+				while ( $row = $result->fetch_assoc() ){ ?>
+				
+				
+				<div class="panel panel-default">
 				<div class="row">
-					<a href="productDetail.php">
+					<a href="#">
 						<div class="col-md-1">
 						</div>
 						<div class="col-md-2">
-							<img src="img/historytest.jpeg" class="img-responsive" alt="books" width="110" >
+							<img src="<?php echo $row['productImage'];?>" class="img-responsive" alt="books" width="110" >
 						</div>
 						<div class="col-md-7">
-							<p><strong class="text-primary">Product Name: </strong><span class="text-success">Rolex Watch<span></p>
-							<p><strong class="text-primary">Product Description:</strong> <span class="text-success">This is a Gold and silver plated watch</span></p>
-							<p><strong class="text-primary">Quantity Purchased:</strong><span class="text-success">1</span></p>
-							<p><strong class="text-primary">Cost:</strong><span class="text-success">300$</span></p>
+							<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo $row['productName'];?><span></p>
+							<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo $row['productDescShort'];?></span></p>
+							<p><strong class="text-primary">Quantity Purchased:</strong><span class="text-success"><?php echo $row['quantityPurchased'];?></span></p>
+							<p><strong class="text-primary">Cost:</strong><span class="text-success"><?php echo $row['productPrice'];?></span></p>
 							<p><strong class="text-primary">Purchase Date:</strong><span class="text-success">2/7/2016</span></p>					
 						</div>
 					</a>
@@ -62,7 +81,21 @@
 					
 				</div>
 			</div>
-			<div class="panel panel-default">
+				
+				
+				
+				
+			<?php 
+			}
+			?>
+			
+			
+			
+			
+			
+			
+			
+			<!--<div class="panel panel-default">
 				<div class="row">
 					<a href="#">
 						<div class="col-md-1">
@@ -86,7 +119,7 @@
 						</div>
 					
 				</div>
-			</div>
+			</div>-->
 		</div>			
 	</div>
 	
