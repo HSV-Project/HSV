@@ -44,6 +44,22 @@
   <body>
 	<?php include 'header.php';?>
 	
+	<?php
+		$sql = "SELECT * FROM Inventory ORDER BY productAddedDate DESC LIMIT 1";
+		$result = $mysqli->query($sql);
+		$row1 = $result->fetch_assoc();
+		
+		
+		$sql = "SELECT * FROM Inventory ORDER BY productAddedDate DESC LIMIT 1, 1";
+		$result = $mysqli->query($sql);
+		$row2 = $result->fetch_assoc();
+		
+		
+		$sql = "SELECT * FROM Inventory ORDER BY productAddedDate DESC LIMIT 2, 1;";
+		$result = $mysqli->query($sql);
+		$row3 = $result->fetch_assoc();
+	?>
+	
 	<!-- Carousel -->
 	<div class="container">
 	
@@ -58,26 +74,26 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner">
 				<div class="item active">
-				  <img src="img/main-slider1.jpg" alt="">
+				  <img src="<?php echo $row1['productImage'];?>" alt="">
 				  <div class="carousel-caption">
-					<h3>Description: This book is all about java programming.</h3>
-					<p>Cost: 50$</p>
+					<h3><?php echo $row1['productDescShort'];?></h3>
+					<p>Cost: <?php echo $row1['productPrice'];?>$</p>
 				  </div>
 				</div>
 
 				<div class="item">
-				  <img src="img/main-slider2.jpg" alt="Chicago">
+				  <img src="<?php echo $row2['productImage'];?>" alt="Chicago">
 				  <div class="carousel-caption">
-					<h3>Description: This book is all about java programming.</h3>
-					<p>Cost: 50$</p>
+					<h3><?php echo $row2['productDescShort'];?></h3>
+					<p>Cost: <?php echo $row2['productPrice'];?>$</p>
 				  </div>
 				</div>
 
 				<div class="item">
-				  <img src="img/main-slider3.jpg" alt="New York">
+				  <img src="<?php echo $row3['productImage'];?>" alt="New York">
 				  <div class="carousel-caption">
-					<h3>Description: This book is all about java programming.</h3>
-					<p>Cost: 50$</p>
+					<h3><?php echo $row3['productDescShort'];?></h3>
+					<p>Cost: <?php echo $row3['productPrice'];?>$</p>
 				  </div>
 				</div>
 			  </div>
