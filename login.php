@@ -6,9 +6,13 @@ session_start();
 $email = $mysqli->escape_string($_POST['email']);
 $result = $mysqli->query("SELECT * FROM Users WHERE email='$email'");
 
+
+
 if ( $result->num_rows == 0 ){ // User doesn't exist
+
     $_SESSION['message'] = "User with that email doesn't exist!";
-    header("loctaion: error.php");
+    header("location: error.php");
+	
 }
 else { // User exists
     $user = $result->fetch_assoc();
@@ -22,15 +26,16 @@ else { // User exists
 		}
 		
 		else{
-                    error_log("userid:".$user['userID']);
+                    //error_log("userid:".$user['userID']);
         $_SESSION['userID'] = $user['userID'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['first_name'] = $user['firstName'];
         $_SESSION['last_name'] = $user['lastName'];
         $_SESSION['active'] = $user['active'];
-	$_SESSION['seller'] = $user['seller'];
+	//$_SESSION['seller'] = $user['seller'];
 
 		$_SESSION['seller'] = $user['seller'];
+		
 		$_SESSION['id'] = $user['userID'];
 
         

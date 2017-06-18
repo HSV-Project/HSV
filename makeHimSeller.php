@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ( $mysqli->query($sql) ) {
 
         $_SESSION['message'] = "<p>Congratulations you are a seller now!!!!</p><p>To add a product for sale <a href='sellerAddProduct.php'>Click Here!</a></p> ";
-        header("location: success.php");    
+        header("location: success.php"); 
+		$_SESSION['seller']=1;
 
         }
 

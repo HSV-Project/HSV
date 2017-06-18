@@ -26,7 +26,7 @@ function checkIfNotLoginThenHide(){
 	
 function checkIfNotSellerThenHide(){
 	
-	if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false || $_SESSION['active']==0 ||  $_SESSION['seller']==0 ){
+	if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false || $_SESSION['active']==0 || !isset($_SESSION['seller']) || $_SESSION['seller']==0 ){
 		return "hidden";
 	}
 	else{
@@ -40,7 +40,7 @@ function checkIfNotLoginOrSellerThenHide(){
 	if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false || $_SESSION['active']==0){
 		return "hidden";
 	}
-	elseif($_SESSION['seller']==1 ){
+	elseif(!isset($_SESSION['seller']) || $_SESSION['seller']==1 ){
 		return "hidden";
 	}
 	else{

@@ -3,6 +3,7 @@ session_start();?>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	//print_r($_POST);
 	if(isset($_POST["total"])){
 		 $total = $_POST["total"];		
 		}
