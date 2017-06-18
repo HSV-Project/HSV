@@ -37,26 +37,28 @@
 
                         <h4>Top categories</h4>
 
-                        <h5>Men</h5>
+                        <h5>Books</h5>
 
                         <ul>
-                            <li><a href="category.html">T-shirts</a>
+                            <li><a href="category.html">Learning</a>
                             </li>
-                            <li><a href="category.html">Shirts</a>
-                            </li>
-                            <li><a href="category.html">Accessories</a>
+                            <li><a href="category.html">Magazine</a>
                             </li>
                         </ul>
 
-                        <h5>Ladies</h5>
+                        <h5>Furniture</h5>
                         <ul>
-                            <li><a href="category.html">T-shirts</a>
+                            <li><a href="category.html">Indoor-Furniture </a>
                             </li>
-                            <li><a href="category.html">Skirts</a>
+                            <li><a href="category.html">Outdoor-Furniture </a>
                             </li>
-                            <li><a href="category.html">Pants</a>
+                        </ul>
+						
+						<h5>Electronics</h5>
+                        <ul>
+                            <li><a href="category.html">TV</a>
                             </li>
-                            <li><a href="category.html">Accessories</a>
+                            <li><a href="category.html">Smart Phones</a>
                             </li>
                         </ul>
 
@@ -69,16 +71,15 @@
 
                         <h4>Where to find us</h4>
 
-                        <p><strong>Obaju Ltd.</strong>
-                            <br>13/25 New Avenue
-                            <br>New Heaven
-                            <br>45Y 73J
-                            <br>England
+                        <p><strong>Eastern Michigan University.</strong>
+                            <br>900 Oakwood St 
+                            <br>Ypsilanti 
+                            <br>MI 48197                            
                             <br>
-                            <strong>Great Britain</strong>
+                            <strong>USA</strong>
                         </p>
 
-                        <a href="contact.html">Go to contact page</a>
+                        <a href="contact.php">Go to contact page</a>
 
                         <hr class="hidden-md hidden-lg">
 
@@ -91,7 +92,7 @@
 
                         <h4>Get the news</h4>
 
-                        <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                        <p class="text-muted">Subscribe to get daily product updates, offers!! and more</p>
 
                         <form>
                             <div class="input-group">

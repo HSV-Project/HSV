@@ -34,7 +34,7 @@
     <!-- your stylesheet with modifications -->
     <link href="bootstrap/css/templatecss/custom.css" rel="stylesheet">
 
-    <!-- <script src="js/respond.min.js"></script> -->
+    
 
     <link rel="shortcut icon" href="favicon.png">
 
@@ -82,7 +82,7 @@
 				</div>
 
 				<div class="item">
-				  <img src="<?php echo $row2['productImage'];?>" alt="Chicago">
+				  <img src="<?php echo $row2['productImage'];?>" alt="">
 				  <div class="carousel-caption">
 					<h3><?php echo $row2['productDescShort'];?></h3>
 					<p>Cost: <?php echo $row2['productPrice'];?>$</p>
@@ -181,8 +181,10 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+	
 	
   </body>
 </html>
