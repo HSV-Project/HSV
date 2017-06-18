@@ -96,11 +96,11 @@ session_start();
 									
 													<tr id=<?php echo $nthElement;?>>
 														<td>
-															<a href="#">
+															<a href="productDetail.php?productId=<?php echo $prodId; ?>">
 																<img src=<?php echo getProductImg($prodId);?> alt="White Blouse Armani">
 															</a>
 														</td>
-														<td><a href="#"><?php echo getProductName($prodId);?></a>
+														<td><a href="productDetail.php?productId=<?php echo $prodId; ?>"><?php echo getProductName($prodId);?></a>
 														</td>
 														<td>
 															<input type="number" class="qty" max=<?php echo getProductQuantity($prodId);?> value=<?php echo $quantity;?> class="form-control" onclick="recalculate(<?php echo $nthElement;?>,<?php echo $prodId;?>)">                                     

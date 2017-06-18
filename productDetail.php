@@ -1,4 +1,6 @@
-<?php require 'checkInCart.php' ?>
+<?php require 'checkInCart.php' ;
+require 'Database.php';
+?>
 <?php
     session_start();
     $productList=$_SESSION['productList'];
@@ -24,6 +26,19 @@
     }
     
     ?>
+	
+	
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	print_r($_POST);
+	$prodId = $_POST['productID'];
+	$userID = $_POST['userID'];
+	$review = $_POST['review'];
+	$stars = $_POST['NoOfStars'];
+	$sql = "INSERT INTO Reviews(reviewProductId, reviewUserId, reviewDesc, reviewStars) VALUES('$prodId','$userID','$review','$stars')";
+	$mysqli->query($sql);
+}
+?>	
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -148,14 +163,17 @@
                                 <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
                                 </p>
                             </blockquote>-->
-                            <form action="" method="post">
+							<h4 class="<?php echo checkIfLoginThenHide();?> text-primary">Login to add reviews</h4>
+                            <form class="<?php echo checkIfNotLoginThenHide();?>" action="productDetail.php?productId=<?php echo $productID;?>" method="post">
                                     <div class="form-group">
                                             <h4>Add a review</h4>
-                                            <p><input type="number" step="1" min="0" max="5" >Select star rating</p>
+                                            <p><input name="NoOfStars" type="number" step="1" min="0" max="5" >Select star rating</p>
                                     </div>
                                     <div class="form-group">
                                             <input type="text" name="review" placeholder="Enter your review here" class="form-control">
                                     </div>
+									<input type="text" class="hidden" name="userID" value=<?php echo $_SESSION['id'];?>>
+									<input type="text" class="hidden" name="productID" value=<?php echo $productID;?>>
                                     <div class="text-center">
                                             <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save review</button>
                                     </div>
@@ -165,16 +183,29 @@
                                     <h4>Reviews:</h4>
                             </div>
 
-
-                            <div>
-                                    <span>Review by:"user name"</span>
-                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-                                    <span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
-                                    <span class="glyphicon glyphicon-star" style="color:silver; font-size:1.3em;"></span>
-                                    <span>Review statement_________________________________________________________</span>								
-                            </div>
+							<?php 
+								
+								$query="SELECT * FROM Reviews,Users WHERE reviewProductId = $productID AND Reviews.reviewUserId = Users.userID";
+								$result = $mysqli->query($query);
+								
+								while($row = $result->fetch_assoc()) {?>
+									<blockquote>
+									
+									<?php for ($x = 0; $x < $row['reviewStars'] ; $x++) { ?> 
+										
+										<span class="glyphicon glyphicon-star" style="color:yellow; font-size:1.3em;"></span>
+									<?php } 
+									for ($x = 0; $x < 5-$row['reviewStars'] ; $x++) { ?>
+										<span class="glyphicon glyphicon-star" style="color:silver; font-size:1.3em;"></span>
+									<?php } ?>
+									
+									<?php echo $row['reviewDesc']; ?>
+									<footer><?php echo $row['firstName']." . ".$row['lastName']; ?></footer>
+									</blockquote>
+								<?php }
+							
+							?>
+                            
 							
 							
                     </div>

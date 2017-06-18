@@ -1,5 +1,7 @@
 <?php
 require 'Database.php';
+require 'getProductInfo.php';
+require 'checkInCart.php';
 session_start();
 
 if(isset($_SESSION['id'])){
@@ -54,12 +56,13 @@ if(isset($_SESSION['id'])){
 		 <div class="panel-group">
 			
 			<?php
+				if(isset($_SESSION['id'])){
 				while ( $row = $result->fetch_assoc() ){ ?>
 				
 				
 				<div class="panel panel-default">
 				<div class="row">
-					<a href="#">
+					<a href="productDetail.php?productId=<?php echo $row['productId']; ?>">
 						<div class="col-md-1">
 						</div>
 						<div class="col-md-2">
@@ -74,13 +77,15 @@ if(isset($_SESSION['id'])){
 							<p><strong class="text-primary">Purchase Date and Time:</strong><span class="text-success"><?php echo $row['dateTimePurchased'];?></span></p>					
 						</div>
 					</a>
+					<form action="setTheCookies.php" method="post">
 						<div class="col-md-2">
-								<p class="text-center text-primary"><strong>Select Quantity</strong></p>
-								<p class="text-center"><input type="number" step ="1" min="0" max="5" /></p>
-								<p class="text-center"><button type="button" class="btn btn-primary">Add to cart</button></p>
-							
+								<input type="text" class="hidden" name="productId" value="<?php echo $row['productId'] ?>">
+								<p class="text-center text-primary <?php echo checkIfAlreadyInCartThenHide($row['productId']);?>"><strong>Select Quantity</strong></p>
+								<p class="text-center <?php echo checkIfAlreadyInCartThenHide($row['productId']);?>"><input type="number" value="1" step ="1" min="1" max="<?php echo getProductQuantity($row['productId']); ?>" name="qtyPurchased"/> </p><p class="text-center" style="color:blue;">Available in stock <?php echo getProductQuantity($row['productId']);?></p> 
+								<p class="text-center"><button type="submit" class="btn btn-primary <?php if(getProductQuantity($row['productId'])==0){echo "hidden";} else{ echo checkIfAlreadyInCartThenHide($row['productId']);}?>"><i class="fa fa-shopping-cart"></i>Add to cart</button></p>
+						        <a href="cart.php" type="submit" class="btn btn-primary <?php echo checkIfNotInCartThenHide($row['productId']);?>"><i class="fa fa-shopping-cart"></i>Go to cart</a>                  
 						</div>
-					
+					</form>
 				</div>
 			</div>
 				
@@ -88,7 +93,45 @@ if(isset($_SESSION['id'])){
 				
 				
 			<?php 
-			}
+					}
+				}
+				
+				else{
+					$cookieAry = unserialize($_COOKIE["notLoggedInUser"]);
+						foreach ($cookieAry as $prodId => $quantity){ ?>
+						
+						
+						<div class="panel panel-default">
+						<div class="row">
+							<a href="#">
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-2">
+									<img src="img/historytest.jpeg" class="img-responsive" alt="books" width="110" >
+								</div>
+								<div class="col-md-7">
+									<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo getProductName($prodId);?><span></p>
+									<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo getProductDesc($prodId);?></span></p>
+									<p><strong class="text-primary">Quantity Purchased:</strong><span class="text-success"><?php echo $quantity;?></span></p>
+									<p><strong class="text-primary">Cost:</strong><span class="text-success"><?php echo getProductPrice($prodId);?></span></p>
+									
+								</div>
+							</a>
+								<div class="col-md-2">
+										<p class="text-center text-primary"><strong>Select Quantity</strong></p>
+										<p class="text-center"><input type="number" step ="1" min="0" max="5" /></p>
+										<p class="text-center"><button type="button" class="btn btn-primary">Add to cart</button></p>
+									
+								</div>
+							
+						</div>
+					</div>
+						
+						
+							
+						<?php }
+				}
+				
 			?>
 			
 			
