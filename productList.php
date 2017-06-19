@@ -1,5 +1,4 @@
 <?php 
-
 include 'productListBackend.php'; 
 session_start();
 if (isset($_GET['department']) && !empty($_GET['department'])) {
@@ -20,7 +19,6 @@ elseif(isset($_POST['search']) && !empty ($_POST['search'])){
  }
 $_SESSION['productList']=$productList;
 //echo count($productList);
-
 //echo $productList[0];
 ?>
 <!DOCTYPE html>

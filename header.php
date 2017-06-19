@@ -1,5 +1,5 @@
+<?php include 'checkIfLogin.php'; ?>
 
-<?php require 'checkIfLogin.php';?>
 <?php require 'activateOfferOfTheDay.php';?>
 
 <!-- *** TOPBAR ***
@@ -111,6 +111,8 @@
                     <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="sellerAddProduct.php">Add Product</a> <!--class="active"-->
                     </li>
                     <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="productList.php?user=seller">My Products</a> <!--class="active"-->
+                    </li>
+                    <li class="<?php echo checkIfNotSellerThenHide();?>"><a href="sellerReports.php">My Reports</a> <!--class="active"-->
                     </li>
 				</ul>
 
