@@ -129,14 +129,9 @@
                       </label>
                     <input type="file" class="form-control" name="imageMain" autocomplete="off" id="imageMain" accept="image/*" onchange="document.getElementById('imageMain').value = this.value"/>      
                 </div>
-<<<<<<< Updated upstream
-		<div class="box">
-					
-					
-			  </div>
+
 	
 	</div>
-=======
 		
 						  
 						  
@@ -149,8 +144,7 @@
 
 </div>
 </div>
->>>>>>> Stashed changes
-</div>
+
 	
 	
 	
