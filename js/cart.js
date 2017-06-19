@@ -1,8 +1,8 @@
-function recalculate(rowId,product_id){
+function recalculate(rowId,product_id,offerActive){
 	//console.log(rowId);
-	document.getElementById(rowId).addEventListener('change', doThing(rowId,product_id));;
+	document.getElementById(rowId).addEventListener('change', doThing(rowId,product_id,offerActive));
 }
-function doThing(rowId, product_id){
+function doThing(rowId, product_id,offerActive){
 	//console.log(rowId);
 	var priceToDiaplay = document.getElementById(rowId).getElementsByClassName("priceToCalculate")[0];
 	
@@ -18,7 +18,9 @@ function doThing(rowId, product_id){
 	
 	var displayTotal = document.getElementById("tableTotal");
 	var displayTotalanother = document.getElementById("anotherTotal");
+	var cartTotal = document.getElementById("cartTotal");
 	var subTotal = document.getElementById("subTotal");
+	var subTotalInp = document.getElementById("subTotalInp");
 	var pricesArray = document.getElementsByClassName("priceToCalculate");
 	var total = 0;
 	
@@ -31,7 +33,15 @@ function doThing(rowId, product_id){
 	
 	displayTotal.innerHTML = total.toFixed(2);
 	subTotal.innerHTML = total.toFixed(2);
+	subTotalInp.value = total.toFixed(2);
 	displayTotalanother.innerHTML = (total + parseInt(10)).toFixed(2);
+	cartTotal.value = (total + parseInt(10)).toFixed(2);
+	
+	if(offerActive == 1 && total>50){
+		document.getElementById("discount").innerHTML = (.35* total).toFixed(2);
+		displayTotalanother.innerHTML = ((total + parseInt(10)).toFixed(2)) - (.35* total);
+		cartTotal.value = ((total + parseInt(10)).toFixed(2)) - (.35* total);
+	}
 	
 	
 	
@@ -47,5 +57,7 @@ function doThing(rowId, product_id){
         };
         xmlhttp.open("POST", "cookieModificationOnMovingToCheckout.php?pID=" +product_id +"&qty="+ qty, false);
         xmlhttp.send();
+		
+		window.reload;
 	
 }

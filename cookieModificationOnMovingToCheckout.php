@@ -12,5 +12,7 @@ $qty = $_REQUEST["qty"];
 	$cookieString = serialize($cookieArray);
 	setcookie("productInCart", $cookieString, time() + (86400 * 30), "/");
 	//print_r(unserialize($cookieString));
-
+	
+	
+	
 ?>

@@ -2,11 +2,14 @@
 require 'Database.php';
 session_start();
 ?>
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	//print_r($_POST);
 	if(isset($_POST["total"])){
-	 $total = $_POST["total"];	 
+	 $total = $_POST["total"];
+	 $subTotalInp = $_POST["subTotalInp"];
+	 	
 	}
 }
 ?>
@@ -181,23 +184,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="box-header">
                             <h3>Order summary</h3>
                         </div>
-                        <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+                        <p class="text-muted">The Total is calculated based upon Shipping and Discounts if applicable.</p>
 
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td>Order subtotal</td>
-                                        <th>$<?php echo $total-10;?></th>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping and handling</td>
-                                        <th>$10.00</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Tax</td>
-                                        <th>$0.00</th>
-                                    </tr>
+                                    
                                     <tr class="total">
                                         <td>Total</td>
                                         <th>$<?php echo $total;?></th>

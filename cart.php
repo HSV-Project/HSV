@@ -103,7 +103,8 @@ session_start();
 														<td><a href="productDetail.php?productId=<?php echo $prodId; ?>"><?php echo getProductName($prodId);?></a>
 														</td>
 														<td>
-															<input type="number" class="qty" max=<?php echo getProductQuantity($prodId);?> value=<?php echo $quantity;?> class="form-control" onclick="recalculate(<?php echo $nthElement;?>,<?php echo $prodId;?>)">                                     
+															
+															<input type="number" class="qty" max=<?php echo getProductQuantity($prodId);?> value=<?php echo $quantity;?> class="form-control" onclick="recalculate(<?php echo $nthElement;?>,<?php echo $prodId;?>,<?php if(isset($_SESSION['offer'])){echo $_SESSION['offer'];}?>)">                                     
 														</td>
 														<td>$<span class = "unitPrice"><?php echo getProductPrice($prodId); ?></span></td> 
 														<td>$0.00</td> 
@@ -138,8 +139,10 @@ session_start();
                                 </div>
                                 <div class="pull-right">
                                     <!--<button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>-->
-                                    <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                                    <button type="submit" class="btn btn-primary <?php echo checkIfNotLoginThenHide();
+									if(!isset($_COOKIE["productInCart"])){echo "hidden";} ?>">Proceed to checkout <i class="fa fa-chevron-right"></i>									
                                     </button>
+									<a href="register.php" class="btn btn-danger <?php echo checkIfLoginThenHide();?>">Login to proceed to checkout</a>
                                 </div>
                             </div>
 
@@ -168,6 +171,7 @@ session_start();
                                     <tr>
                                         <td>Order subtotal</td>
                                         <th>$<span id="subTotal" ><?php if(isset($_COOKIE['productInCart'])){echo $total;}?></span></th>
+										<input class="hidden" type="text" id="subTotalInp" name="subTotalInp" value="<?php if(isset($_COOKIE['productInCart'])){echo $total;}?>">
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -179,27 +183,29 @@ session_start();
                                     </tr>
 									<tr>
                                         <td><?php if(isset($_SESSION['first_name'])){echo "offer of the day";} else{echo "Login to avail offers";}?></td>
-                                        <th>-$<?php if(isset($_SESSION["offer"])){
+                                        <th>-$<span id="discount"><?php if(isset($_SESSION["offer"])){
 												if($total>50){											
 												echo .35*$total;
 												}
 												else{
 													echo "Total less than $50";
 													}
-											}?></th>
+											}?></span></th>
                                     </tr>
 									
                                     <tr class="total">
                                         <td>Total</td>
 										<?php if(isset($_COOKIE['productInCart'])){if(isset($_SESSION["offer"])&& $total>50){$finalTotal = $total-(.35*$total)+10;}else{$finalTotal = $total+10;}}?>
-                                        <th>$<span id="anotherTotal"  ><?php echo $finalTotal?></span></th>
+                                        <th>$<span id="anotherTotal"  ><?php if(isset($finalTotal)){echo $finalTotal;}?></span></th>
                                     </tr>
-									<input type="text" class="hidden" value=<?php echo $finalTotal;?> name="total">
+									<input id="cartTotal" type="text" class="hidden"  value=<?php if(isset($finalTotal)){echo $finalTotal;}?> name="total">
+									
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
+					
 
 </form>
                     <div class="box">

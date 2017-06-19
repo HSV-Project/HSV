@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 		$offerID = $_GET["offerID"];
 		
 		if($offerID == 1){
-				$_SESSION["offer"] = "35%on$50";
+				$_SESSION["offer"] = 1;
 		}
 		else{
 			//some other offer
