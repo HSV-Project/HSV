@@ -124,14 +124,14 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="firstname" >From Date</label>
-                    <input type="date" class="input-sm" name="fromDate" value="<?php if($_POST['fromDate']) echo $_POST['fromDate'];?>"/>
+                    <input type="date" class="input-sm" name="fromDate" value="<?php if(isset($_POST['fromDate'])) echo $_POST['fromDate'];?>"/>
                 </div>
             </div>
 
             <div class="col-sm-8">
                 <div class="form-group">
                     <label for="lastname">To Date</label>
-                    <input type="date" class="input-sm" name="toDate" value="<?php if($_POST['toDate']) echo $_POST['toDate'];?>"/>
+                    <input type="date" class="input-sm" name="toDate" value="<?php if(isset($_POST['toDate'])) echo $_POST['toDate'];?>"/>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
             ?>
             <tr>
               <td style="text-align:center;"><?php echo $productName; ?></td>
-              <td style="text-align:center;"><?php echo $quantitySold; ?></td>
+              <td style="text-align:center;">$<?php echo $quantitySold; ?></td>
               <td style="text-align:center;"><?php echo $quantityAvail; ?></td>
 
             </tr>
@@ -205,16 +205,16 @@
                             $productName=$row["productName"];
                             $quantitySold=$row["quantitySold"];
                             $totalSales=$row["totalSales"];
-                            $total=$total+$totalSales;
+                            $total=number_format(($total+$totalSales),2);
                 ?>
                 <tr>
                   <td style="text-align:center;"><?php echo $productName; ?></td>
                   <td style="text-align:center;"><?php echo $quantitySold; ?></td>
-                  <td style="text-align:center;"><?php echo $totalSales; ?></td>
+                  <td style="text-align:center;">$<?php echo $totalSales; ?></td>
 
                 </tr>
                 <?php } ?>
-                <tr><td colspan="3" style="text-align:right; font-weight:bold;">Total in Sales: <?php echo $total; ?>
+                <tr><td colspan="3" style="text-align:right; font-weight:bold;">Total in Sales: $<?php echo $total; ?>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
                 <?php } ?>
               </tbody>
@@ -243,16 +243,16 @@
                                 $orders=$row["orders"];
                                 $revenue=$row["revenue"];
                                 //$totalSales=$row["totalSales"];
-                                $total=$total+$revenue;
+                                $total=number_format(($total+$revenue),2);
                     ?>
                     <tr>
                       <td style="text-align:center;"><?php echo $datePurchased->format('n/d/Y'); ?></td>
                       <td style="text-align:center;"><?php echo $orders; ?></td>
-                      <td style="text-align:center;"><?php echo $revenue; ?></td>
+                      <td style="text-align:center;">$<?php echo $revenue; ?></td>
 
                     </tr>
                     <?php } ?>
-                    <tr><td colspan="3" style="text-align:right; font-weight:bold;">Total in Sales: <?php echo $total; ?>
+                    <tr><td colspan="3" style="text-align:right; font-weight:bold;">Total in Sales: $<?php echo $total; ?>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
                     <?php } ?>
                   </tbody>
