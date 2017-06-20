@@ -179,7 +179,7 @@
         </p>
         <?php unset($_SESSION["successMsg"]); }?>
         <hr>
-        <form action="editProduct.php" method="post" enctype="multipart/form-data">
+        <form action="editProduct.php" method="post" enctype="multipart/form-data" novalidate>
                 
             
                 <div class="form-group">
@@ -259,7 +259,7 @@
                     <input type="file" class="form-control" name="imageMain" autocomplete="off" id="imageMain" accept="image/*" value="<?php echo $productImage ?>" style="display:none" onchange="document.getElementById('imageMain').value = this.value"/>
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                       <label for="subImg1">
                         Sub Image 1
                       </label>
@@ -278,7 +278,7 @@
                         Sub Image 3
                       </label>
                       <input type="file" class="form-control" name="subImg3" autocomplete="off" id="subImg3" accept="image/*" onchange="document.getElementById('subImg3').value = this.value"/>
-                </div>
+                </div>-->
 
 
                <div class="text-center"> 

@@ -11,7 +11,7 @@ if (isset($_SESSION['userID'])) {
     
 }
 if (isset($_POST['productName'])) {
-    $pName = $_POST['productName'];
+    $pName = mysqli_real_escape_string($mysqli, $_POST['productName']);
 } else {
     $pName = "";
 }
@@ -21,7 +21,7 @@ if (isset($_POST['department'])) {
     $department = "";
 }
 if (isset($_POST['descShort'])) {
-    $shortDesc = $_POST['descShort'];
+    $shortDesc = mysqli_real_escape_string($mysqli, $_POST['descShort']);
 } else {
     $shortDesc = "";
 }
@@ -36,7 +36,7 @@ if (isset($_POST['quantity'])) {
     $quantity = "";
 }
 if (isset($_POST['descLong'])) {
-    $longDesc = $_POST['descLong'];
+    $longDesc = mysqli_real_escape_string($mysqli, $_POST['descLong']);
 } else {
     $longDesc = "";
 }
@@ -45,7 +45,7 @@ if (isset($_POST['imageMain'])) {
 } else {
     $mainImage = "defaultImg.jpeg";
 }
-if (isset($_POST['subImg1'])) {
+/*if (isset($_POST['subImg1'])) {
     $image1 = $_POST['subImg1'];
 } else {
     $image1 = "";
@@ -59,7 +59,7 @@ if (isset($_POST['subImg3'])) {
     $image3 = $_POST['subImg3'];
 } else {
     $image3 = "";
-}
+}*/
 
 //$sellerId=1;
 $imgNameRef="imageMain";
@@ -77,6 +77,7 @@ if($uploadOk==1)
             . "productImage, productSellerId) values ('$pName','$shortDesc','$longDesc','$price',"
             . "'$quantity',CURDATE(),'$department','$imageName','$sellerId')";
 
+    error_log($query);
     $result=$mysqli->query($query);
     if($mysqli->affected_rows!=-1){
         $insertedId=$mysqli->insert_id;
@@ -90,6 +91,7 @@ if($uploadOk==1)
             $success = upload_Img($imgNameRef, $imageName);
         }
         $query="UPDATE Inventory SET productImage='$imageName' WHERE productID='$insertedId'";
+        error_log($query);
         $result=$mysqli->query($query);
         if($mysqli->affected_rows!=-1){
             if ($success == 1) {
@@ -104,6 +106,7 @@ if($uploadOk==1)
             . "AND productQuantityAvail='$quantity' AND productCategory='$department' AND productSellerId='$sellerId'";
     
     $result=$mysqli->query($query);
+    error_log($query);
     $productId;
     
     if ($result->num_rows > 0) {

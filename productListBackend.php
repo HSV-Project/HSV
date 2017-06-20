@@ -20,7 +20,6 @@ function get_products_byDepartment($department){
                            'productCategory'=>$row["productCategory"],
                            'productImage'=>$row["productImage"],
                            'productSellerId'=>$row["productSellerId"]);*/
-
             //return json_encode($product);
         }
     }

@@ -129,45 +129,14 @@
                       </label>
                     <input type="file" class="form-control" name="imageMain" autocomplete="off" id="imageMain" accept="image/*" onchange="document.getElementById('imageMain').value = this.value"/>      
                 </div>
-		<div class="box">
-					
-					
-			  </div>
-	
+            
+                <div class="text-center"> 
+                   <input type="submit" class="btn btn-primary" value="Add This Product" name="submit" />
+               </div>
 	</div>
 </div>
-	
-	
-	
-	
-	
-	
-	
 
-                <div class="form-group">
-                      <label for="subImg1">
-                        Sub Image 1
-                      </label>
-                      <input type="file" class="form-control" name="subImg1" autocomplete="off" id="subImg1" accept="image/*" onchange="document.getElementById('subImg1').value = this.value"/>
-                </div>
-
-                <div class="form-group">
-                      <label for="subImg2">
-                        Sub Image 2
-                      </label>
-                      <input type="file" class="form-control" name="subImg2" autocomplete="off" id="subImg2" accept="image/*" onchange="document.getElementById('subImg2').value = this.value"/>
-                </div>
-
-                <div class="form-group">
-                      <label for="subImg3">
-                        Sub Image 3
-                      </label>
-                      <input type="file" class="form-control" name="subImg3" autocomplete="off" id="subImg3" accept="image/*" onchange="document.getElementById('subImg3').value = this.value"/>
-                </div>
-
-               <div class="text-center"> 
-                   <input type="submit" class="btn btn-primary" value="Add This Product" name="submit" />
-               </div>	
+               	
             </form>
                                 
         </div>
