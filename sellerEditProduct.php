@@ -179,7 +179,7 @@
         </p>
         <?php unset($_SESSION["successMsg"]); }?>
         <hr>
-        <form action="editProduct.php" method="post" enctype="multipart/form-data">
+        <form action="editProduct.php" method="post" enctype="multipart/form-data" novalidate>
                 
             
                 <div class="form-group">

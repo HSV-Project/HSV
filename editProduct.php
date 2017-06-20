@@ -2,6 +2,7 @@
 session_start();
 include 'Database.php';
 
+
 if(isset($_POST['submit']))
 {
     $action=$_POST['submit'];
@@ -19,7 +20,7 @@ if (isset($_POST['productId'])) {
     $productId="";
 }
 if (isset($_POST['productName'])) {
-    $pName = $_POST['productName'];
+    $pName = mysqli_real_escape_string($mysqli, $_POST['productName']);
 } else {
     $pName = "";
 }
@@ -29,7 +30,7 @@ if (isset($_POST['department'])) {
     $department = "";
 }
 if (isset($_POST['descShort'])) {
-    $shortDesc = $_POST['descShort'];
+    $shortDesc = mysqli_real_escape_string($mysqli, $_POST['descShort']);
 } else {
     $shortDesc = "";
 }
@@ -44,7 +45,7 @@ if (isset($_POST['quantity'])) {
     $quantity = "";
 }
 if (isset($_POST['descLong'])) {
-    $longDesc = $_POST['descLong'];
+    $longDesc = mysqli_real_escape_string($mysqli, $_POST['descLong']);
 } else {
     $longDesc = "";
 }
@@ -54,7 +55,7 @@ if (isset($_FILES["imageMain"]["name"])) {
 } else {
     $mainImage = "defaultImg.jpeg";
 }
-if (isset($_POST['subImg1'])) {
+/*if (isset($_POST['subImg1'])) {
     $image1 = $_POST['subImg1'];
 } else {
     $image1 = "";
@@ -68,7 +69,7 @@ if (isset($_POST['subImg3'])) {
     $image3 = $_POST['subImg3'];
 } else {
     $image3 = "";
-}
+}*/
 
 if($action=="Save Changes")
 {
@@ -125,6 +126,7 @@ if($action=="Save Changes")
     header("location: sellerEditProduct.php?productId=$productId");
 }
 elseif($action=="Delete Product") {
+    echo "123";
     $productImage="";
     $query="SELECT productImage from Inventory WHERE productID=$productId";
     $result=$mysqli->query($query);

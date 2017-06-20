@@ -90,12 +90,15 @@ $_SESSION['productList']=$productList;
 							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books" width="110" >
 						</div>
 						<div class="col-md-9">
+                                                    <br/>
 							<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo $productName ?><span></p>
 							<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo $productDescShort ?></span></p>
 							<p><strong class="text-primary">Cost:</strong><span class="text-success"> $<?php echo $productPrice ?></span></p>
                                                         <p><strong class="text-primary">Department:</strong><span class="text-success"> <?php echo $productCategory ?></span></p>
                                                         <?php if(!isset($_GET['user'])) { ?>
                                                         <p><span class="text-success"><strong>Get it in the next 5 days</strong></span></p>
+                                                        <?php } if($productQuantityAvail<5) {?>
+                                                        <p><span class="text-success"><strong>Hurry! Only <?php echo $productQuantityAvail ?> left in stock</strong></span></p>
                                                         <?php } ?>
 						</div>
 					</a>

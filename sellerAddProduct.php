@@ -129,31 +129,22 @@
                       </label>
                     <input type="file" class="form-control" name="imageMain" autocomplete="off" id="imageMain" accept="image/*" onchange="document.getElementById('imageMain').value = this.value"/>      
                 </div>
-
-	
-	</div>
-		
-						  
-						  
-						  
-						  
+            
                 <div class="text-center"> 
-                 <button class="btn btn-primary"/>Add This Product</button>
-                </div>	
-         </form>
-
-</div>
+                   <input type="submit" class="btn btn-primary" value="Add This Product" name="submit" />
+               </div>
+	</div>
 </div>
 
-	
-	
-	
-	
-	
-	
-	
-
-                
+               	
+            </form>
+                                
+        </div>
+            
+	</div>
+        </div>
+      
+    <?php include 'footer.php';?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
