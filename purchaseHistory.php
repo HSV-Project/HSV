@@ -79,9 +79,10 @@ if(isset($_SESSION['id'])){
 					</a>
 					<form action="setTheCookies.php" method="post">
 						<div class="col-md-2">
+						<?php $productQuantityAvail = getProductQuantity($row['productId']);?>
 								<input type="text" class="hidden" name="productId" value="<?php echo $row['productId'] ?>">
 								<p class="text-center text-primary <?php echo checkIfAlreadyInCartThenHide($row['productId']);?>"><strong>Select Quantity</strong></p>
-								<p class="text-center <?php echo checkIfAlreadyInCartThenHide($row['productId']);?>"><input type="number" value="1" step ="1" min="1" max="<?php echo getProductQuantity($row['productId']); ?>" name="qtyPurchased"/> </p><p class="text-center" style="color:blue;">Available in stock <?php echo getProductQuantity($row['productId']);?></p> 
+								<p  class="text-center <?php echo checkIfAlreadyInCartThenHide($row['productId']);?>"><input style=" width: 30%;" type="number" value="1" step ="1" min="1" max="<?php echo $productQuantityAvail; ?>" name="qtyPurchased"/> </p><p class="text-center" style="color:blue;">Available in stock <?php echo getProductQuantity($row['productId']);?></p> 
 								<p class="text-center"><button type="submit" class="btn btn-primary <?php if(getProductQuantity($row['productId'])==0){echo "hidden";} else{ echo checkIfAlreadyInCartThenHide($row['productId']);}?>"><i class="fa fa-shopping-cart"></i>Add to cart</button></p>
 						        <a href="cart.php" type="submit" class="btn btn-primary <?php echo checkIfNotInCartThenHide($row['productId']);?>"><i class="fa fa-shopping-cart"></i>Go to cart</a>                  
 						</div>
