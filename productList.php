@@ -134,16 +134,15 @@ $_SESSION['productList']=$productList;
                             
                             ?>
 			<div class="panel panel-default">
-				<div class="row">
+				<div class="row ">
                                     <?php if(isset($_GET['user'])) { ?>
                                     <a href="sellerEditProduct.php?productId=<?php echo $productID; ?>">
                                     <?php } else{ ?>
                                     <a href="productDetail.php?productId=<?php echo $productID; ?>">
                                     <?php } ?>
-						<div class="col-md-1">
-						</div>
-						<div class="col-md-2">
-							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books" width="110" >
+						
+						<div class="col-md-3" >
+							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books"  >
 						</div>
 						<div class="col-md-9">
                                                     <br/>

@@ -39,8 +39,8 @@ function doThing(rowId, product_id,offerActive){
 	
 	if(offerActive == 1 && total>50){
 		document.getElementById("discount").innerHTML = (.35* total).toFixed(2);
-		displayTotalanother.innerHTML = ((total + parseInt(10)).toFixed(2)) - (.35* total);
-		cartTotal.value = ((total + parseInt(10)).toFixed(2)) - (.35* total);
+		displayTotalanother.innerHTML = (((total + parseInt(10)).toFixed(2)) - (.35* total)).toFixed(2);
+		cartTotal.value = (((total + parseInt(10)).toFixed(2)) - (.35* total)).toFixed(2);
 	}
 	
 	

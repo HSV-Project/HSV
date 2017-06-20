@@ -63,7 +63,7 @@
 	<!-- Carousel -->
 	<div class="container">
 	
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" >
 			  <!-- Indicators -->
 			  <ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -73,31 +73,31 @@
 
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner">
-				<div class="item active">
+				<div class="item active" >
 					<a href="productDetail.php?productId=<?php echo $row1['productID']?>">
-				  <img src="<?php echo $row1['productImage'];?>" alt="">
-				  <div class="carousel-caption">
-					<h3><?php echo $row1['productDescShort'];?></h3>
+				  <img src="<?php echo $row1['productImage'];?>" alt="" style="max-height: 450px;" class="center-block">
+				  <div class="carousel-caption" style="color: white;    text-shadow: 2px 2px 4px green; max">
+					<h3><?php echo $row1['productName'];?></h3>
 					<p>Cost: <?php echo $row1['productPrice'];?>$</p>
 				  </div>
 				  </a>
 				</div>
 
-				<div class="item">
+				<div class="item" >
 				<a href="productDetail.php?productId=<?php echo $row2['productID']?>">
-				  <img src="<?php echo $row2['productImage'];?>" alt="">
-				  <div class="carousel-caption">
-					<h3><?php echo $row2['productDescShort'];?></h3>
+				  <img src="<?php echo $row2['productImage'];?>" alt="" style="max-height: 450px;" class="center-block">
+				  <div class="carousel-caption" style="color: white;    text-shadow: 2px 2px 4px green; ">
+					<h3><?php echo $row2['productName'];?></h3>
 					<p>Cost: <?php echo $row2['productPrice'];?>$</p>
 				  </div>
 				</a>  
 				</div>
 
-				<div class="item">
+				<div class="item" >
 				<a href="productDetail.php?productId=<?php echo $row3['productID']?>">
-				  <img src="<?php echo $row3['productImage'];?>" alt="New York">
-				  <div class="carousel-caption">
-					<h3><?php echo $row3['productDescShort'];?></h3>
+				  <img src="<?php echo $row3['productImage'];?>" alt="New York" style="max-height: 450px;" class="center-block">
+				  <div class="carousel-caption" style="color: white;    text-shadow: 2px 2px 4px green;">
+					<h3><?php echo $row3['productName'];?></h3>
 					<p>Cost: <?php echo $row3['productPrice'];?>$</p>
 				  </div>
 				 </a> 

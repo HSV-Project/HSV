@@ -55,10 +55,10 @@ require 'Database.php';
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	//print_r($_POST);
-	$prodId = $_POST['productID'];
-	$userID = $_POST['userID'];
-	$review = $_POST['review'];
-	$stars = $_POST['NoOfStars'];
+	$prodId = $mysqli->escape_string($_POST['productID']);
+	$userID = $mysqli->escape_string($_POST['userID']);
+	$review = $mysqli->escape_string($_POST['review']);
+	$stars = $mysqli->escape_string($_POST['NoOfStars']);
 	$sql = "INSERT INTO Reviews(reviewProductId, reviewUserId, reviewDesc, reviewStars) VALUES('$prodId','$userID','$review','$stars')";
 	$mysqli->query($sql);
 }
