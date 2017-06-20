@@ -84,10 +84,9 @@ $_SESSION['productList']=$productList;
                                     <?php } else{ ?>
                                     <a href="productDetail.php?productId=<?php echo $productID; ?>">
                                     <?php } ?>
-						<div class="col-md-1">
-						</div>
-						<div class="col-md-2">
-							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books" width="110" >
+						
+						<div class="col-md-3" >
+							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books"  >
 						</div>
 						<div class="col-md-9">
                                                     <br/>
