@@ -74,27 +74,33 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner">
 				<div class="item active">
+					<a href="productDetail.php?productId=<?php echo $row1['productID']?>">
 				  <img src="<?php echo $row1['productImage'];?>" alt="">
 				  <div class="carousel-caption">
 					<h3><?php echo $row1['productDescShort'];?></h3>
 					<p>Cost: <?php echo $row1['productPrice'];?>$</p>
 				  </div>
+				  </a>
 				</div>
 
 				<div class="item">
+				<a href="productDetail.php?productId=<?php echo $row2['productID']?>">
 				  <img src="<?php echo $row2['productImage'];?>" alt="">
 				  <div class="carousel-caption">
 					<h3><?php echo $row2['productDescShort'];?></h3>
 					<p>Cost: <?php echo $row2['productPrice'];?>$</p>
 				  </div>
+				</a>  
 				</div>
 
 				<div class="item">
+				<a href="productDetail.php?productId=<?php echo $row3['productID']?>">
 				  <img src="<?php echo $row3['productImage'];?>" alt="New York">
 				  <div class="carousel-caption">
 					<h3><?php echo $row3['productDescShort'];?></h3>
 					<p>Cost: <?php echo $row3['productPrice'];?>$</p>
 				  </div>
+				 </a> 
 				</div>
 			  </div>
 

@@ -2,10 +2,13 @@
 require 'Database.php';
 ?>
 <?php
+	$productIDpassed=$_GET['productId'];
     session_start();
+	if(isset($_SESSION['productList'])){
     $productList=$_SESSION['productList'];
+	
     
-    $productIDpassed=$_GET['productId'];
+    
     //$department=$_GET['department'];
 
     if(count($productList)>0){
@@ -24,13 +27,34 @@ require 'Database.php';
             }
         }
     }
+	}
+	
+	if(!isset($productID)){
+		
+		$sql = "SELECT * FROM Inventory WHERE productID=$productIDpassed";
+		$result=$mysqli->query($sql);
+		$row = $result->fetch_assoc();
+		
+		
+		$productID=$row["productID"];
+		$productName=$row["productName"];
+		$productDescShort=$row["productDescShort"];
+		$productDescLong=$row["productDescLong"];
+		$productPrice=number_format($row["productPrice"],2);
+		$productQuantityAvail=$row["productQuantityAvail"];
+		$productAddedDate=$row["productAddedDate"];
+		$productCategory=$row["productCategory"];
+		$productImage=$row["productImage"];
+		$productSellerId=$row["productSellerId"];
+		
+	}
     
     ?>
 	
 	
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	print_r($_POST);
+	//print_r($_POST);
 	$prodId = $_POST['productID'];
 	$userID = $_POST['userID'];
 	$review = $_POST['review'];
