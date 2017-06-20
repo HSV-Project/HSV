@@ -1,8 +1,15 @@
 <?php
-function get_products_byDepartment($department){
+function get_products_byDepartment($department,$thispage){
     include 'Database.php';
+    $recordsperpage=7;
+    /*$query="SELECT count(productID) FROM Inventory WHERE productCategory='$department'";
+    $result=$mysqli->query($query);
+    $row=  mysqli_fetch_array($result);
+    $recordsperpage=7;
+    $totalpages=  ceil($row[0]/$recordsperpage);*/
+    $offset=($thispage-1)*$recordsperpage;
     $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, "
-            . "productImage, productCategory, productSellerId from Inventory where productCategory='$department'";
+            . "productImage, productCategory, productSellerId from Inventory where productCategory='$department' ORDER BY productID DESC LIMIT $offset,$recordsperpage";
     
     /* @var $result type */
     $result = $mysqli->query($query);
@@ -27,11 +34,20 @@ function get_products_byDepartment($department){
 return $res_array;
 $mysqli->close();
 }
-function get_products_bySeller($seller){
+function get_products_bySeller($seller,$thispage){
     include 'Database.php';
-    $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, "
-            . "productImage, productCategory, productSellerId from Inventory where productSellerId='$seller'";
+    $recordsperpage=7;
+    //$thispage=$_GET['thispage'];
+    /*$query="SELECT count(productID) FROM Inventory WHERE productSellerId='$seller'";
+    $result=$mysqli->query($query);
+    $row=  mysqli_fetch_array($result);
+    $recordsperpage=7;
+    $totalpages=  ceil($row[0]/$recordsperpage);*/
+    $offset=($thispage-1)*$recordsperpage;
+    $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, productImage,"
+            . " productCategory, productSellerId from Inventory where productSellerId='$seller' ORDER BY productID DESC LIMIT $offset,$recordsperpage";
     
+    error_log($query);
     /* @var $result type */
     $result = $mysqli->query($query);
     $res_array=array();
@@ -44,9 +60,20 @@ function get_products_bySeller($seller){
 return $res_array;
 $mysqli->close();
 }
-function get_products_bySearch($search)
+function get_products_bySearch($search,$thispage)
 {
     include 'Database.php';
+    $recordsperpage=7;
+    $searchTerms = explode(' ', $search);
+    $newSearchString=implode('* ', $searchTerms)."*";
+    /*$query="SELECT count(productID) FROM Inventory WHERE match(productName, productDescShort, "
+                . "productDescLong, productCategory) against ('$newSearchString' in boolean mode)";
+    //error_log($query);
+    $result=$mysqli->query($query);
+    $row=  mysqli_fetch_array($result);
+    $recordsperpage=7;
+    $totalpages=  ceil($row[0]/$recordsperpage);*/
+    $offset=($thispage-1)*$recordsperpage;
     /*$searchTerms = explode(' ', $search);
     $searchTermBits = array();
     foreach ($searchTerms as $term) {
@@ -72,11 +99,10 @@ function get_products_bySearch($search)
         $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, "
                 . "productImage, productCategory, productSellerId, productCategory FROM Inventory WHERE productName LIKE '' AND productDescShort LIKE '' AND productCategory LIKE ''";
     }*/
-    $searchTerms = explode(' ', $search);
-    $newSearchString=implode('* ', $searchTerms)."*";
+    
     $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, "
                 . "productImage, productCategory, productSellerId, productCategory from Inventory where match(productName, productDescShort, "
-                . "productDescLong, productCategory) against ('$newSearchString' in boolean mode);";
+                . "productDescLong, productCategory) against ('$newSearchString' in boolean mode) ORDER BY productID DESC LIMIT $offset,$recordsperpage;";
     
     $result=$mysqli->query($query);
     $res_array=array();

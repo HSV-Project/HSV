@@ -1,18 +1,61 @@
 <?php 
 include 'productListBackend.php'; 
+include 'Database.php';
+
 session_start();
-if (isset($_GET['department']) && !empty($_GET['department'])) {
+if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='department'))) {
     $department = $_GET['department'];
-    $productList = get_products_byDepartment($department);
-} elseif (isset($_GET['user']) && !empty($_GET['user'])) {
-    $user = $_GET['user'];
-    if (isset($_SESSION['userID']) && !empty($_SESSION['userID']))
+    if(!isset($_GET['page']))
+        $thispage=1;
+    else
+        $thispage=$_GET['page'];
+    $query="SELECT count(productID) FROM Inventory WHERE productCategory='$department'";
+    $result=$mysqli->query($query);
+    $row=  mysqli_fetch_array($result);
+    $recordsperpage=7;
+    $totpages=  ceil($row[0]/$recordsperpage);
+    $productList = get_products_byDepartment($department,$thispage);
+    
+    $whichList='department';
+} elseif ((isset($_GET['user']) && !empty($_GET['user'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='seller'))) {
+     if((isset($_GET['user']) && !empty($_GET['user'])))
+        $user = $_GET['user'];
+     if(isset($_SESSION['userID']) && !empty($_SESSION['userID']))
         $userId = $_SESSION['userID'];
-    $productList = get_products_bySeller($userId);
+    //echo "page no:".$_GET['page'];
+    if(!isset($_GET['page']))
+        $thispage=1;
+    else
+        $thispage=$_GET['page'];
+    
+    $productList = get_products_bySeller($userId,$thispage);
+    
+    $query="SELECT count(productID) FROM Inventory WHERE productSellerId='$userId'";
+    $result=$mysqli->query($query);
+    $row=  mysqli_fetch_array($result);
+    $recordsperpage=7;
+    $totpages=  ceil($row[0]/$recordsperpage);
+    
+    $whichList="seller";
 }
-elseif(isset($_POST['search']) && !empty ($_POST['search'])){
+elseif((isset($_POST['search']) && !empty ($_POST['search'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='department'))) {
     $search=$_POST['search'];
-    $productList=get_products_bySearch($search);
+    if(!isset($_GET['page']))
+        $thispage=1;
+    else
+        $thispage=$_GET['page'];
+    $productList=get_products_bySearch($search,$thispage);
+    $searchTerms = explode(' ', $search);
+    $newSearchString=implode('* ', $searchTerms)."*";
+    $query="SELECT count(productID) FROM Inventory WHERE match(productName, productDescShort, "
+                . "productDescLong, productCategory) against ('$newSearchString' in boolean mode)";
+    
+    $result=$mysqli->query($query);
+    $row=  mysqli_fetch_array($result);
+    $recordsperpage=7;
+    $totpages=  ceil($row[0]/$recordsperpage);
+    
+    $whichList="search";
 }
  else {
      $productList=array();
@@ -105,8 +148,63 @@ $_SESSION['productList']=$productList;
 				</div>
 			</div>
                     <?php } 
-                    } 
-                    else { ?>
+                    //previous link
+                     
+                         if($thispage>1){
+                            $page=$thispage-1;
+                            $prevpage= "productList.php?whichList=$whichList&page=$page"; 
+                        }else{
+                            $prevpage="";
+                        }
+                         
+                         if ($thispage<$totpages)
+                        {
+                             
+                            $page = $thispage + 1;
+                            $nextpage = "productList.php?whichList=$whichList&page=$page";
+                        } else
+                        {
+                            $nextpage = "";
+                        }
+                     
+                        if ($totpages > 1)
+                        { 
+                    ?>        
+                    <nav aria-label="navigation" class="text-center">
+                       <ul class="pagination">
+                        <li <?php if($prevpage=="") {?> class="page-item disabled" <?php } else {?> class="page-item" <?php } ?>>
+                          <a class="page-link" href="<?php echo $prevpage; ?>" >Previous</a>
+                        </li>
+                        <?php 
+                        //inbetween 1,2,3 pages links
+                        
+                            $bar = '';
+                            for($page = 1; $page <= $totpages; $page++)
+                            {
+                                if ($page == $thispage)      
+                                { $bar = ""; ?>
+                                <li class="page-item disabled" class="page-item">
+                                    <span class="page-link"><?php echo $page ?><span class="sr-only">(current)</span></span>
+                                </li>
+                                   
+                               <?php } else
+                               {
+                                  $bar = "productList.php?whichList=$whichList&page=$page"; ?>
+                                <li class="page-item"><a class="page-link" href="<?php echo $bar ?>"><?php echo $page ?></a></li>
+                                <li class="page-item active">
+                               <?php }
+                            }
+                        
+                        ?>
+                        <li <?php if($nextpage=="") {?> class="page-item disabled" <?php } else {?> class="page-item" <?php } ?>>
+                          <a class="page-link" href="<?php echo $nextpage; ?>" >Next</a>
+                        </li>
+                       </ul>
+                    </nav>
+                        <?php }?>
+                    <div class="row">
+                    </div>
+                     <?php  } else { ?>
                      <p><h4><strong><?php echo "No Results to be displayed"; ?></strong></h4></p>
                     <div class="row">
                     </div>
