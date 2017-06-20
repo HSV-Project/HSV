@@ -63,15 +63,14 @@ if(isset($_SESSION['id'])){
 				<div class="panel panel-default">
 				<div class="row">
 					<a href="productDetail.php?productId=<?php echo $row['productId']; ?>">
-						<div class="col-md-1">
-						</div>
-						<div class="col-md-2">
-							<img src="<?php echo $row['productImage'];?>" class="img-responsive" alt="books" width="110" >
+						
+						<div class="col-md-3">
+							<img src="<?php echo $row['productImage'];?>" class="img-responsive" alt="books"  >
 						</div>
 						<div class="col-md-7">
 							<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo $row['productName'];?><span></p>
 							<p><strong class="text-primary">Product Description:</strong> <span class="text-success"><?php echo $row['productDescShort'];?></span></p>
-							<p><strong class="text-primary">Quantity Purchased:</strong><span class="text-success"><?php echo $row['quantityPurchased'];?></span></p>
+							<p><strong class="text-primary">Quantity Purchased:</strong><span class="text-success"><span class="label label-success"><?php echo " ".$row['quantityPurchased'];?></span></span></p>
 							<p><strong class="text-primary">Cost:</strong><span class="text-success"><?php echo $row['productPrice'];?></span></p>
 
 							<p><strong class="text-primary">Purchase Date and Time:</strong><span class="text-success"><?php echo $row['dateTimePurchased'];?></span></p>					

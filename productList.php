@@ -121,7 +121,7 @@ $_SESSION['productList']=$productList;
                             
                             ?>
 			<div class="panel panel-default">
-				<div class="row">
+				<div class="row ">
                                     <?php if(isset($_GET['user'])) { ?>
                                     <a href="sellerEditProduct.php?productId=<?php echo $productID; ?>">
                                     <?php } else{ ?>
