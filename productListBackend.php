@@ -1,11 +1,12 @@
 <?php
 function get_products_byDepartment($department,$thispage){
     include 'Database.php';
-    $query="SELECT count(productID) FROM Inventory WHERE productCategory='$department'";
+    $recordsperpage=7;
+    /*$query="SELECT count(productID) FROM Inventory WHERE productCategory='$department'";
     $result=$mysqli->query($query);
     $row=  mysqli_fetch_array($result);
     $recordsperpage=7;
-    $totalpages=  ceil($row[0]/$recordsperpage);
+    $totalpages=  ceil($row[0]/$recordsperpage);*/
     $offset=($thispage-1)*$recordsperpage;
     $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, "
             . "productImage, productCategory, productSellerId from Inventory where productCategory='$department' ORDER BY productID DESC LIMIT $offset,$recordsperpage";
@@ -35,12 +36,13 @@ $mysqli->close();
 }
 function get_products_bySeller($seller,$thispage){
     include 'Database.php';
+    $recordsperpage=7;
     //$thispage=$_GET['thispage'];
-    $query="SELECT count(productID) FROM Inventory WHERE productSellerId='$seller'";
+    /*$query="SELECT count(productID) FROM Inventory WHERE productSellerId='$seller'";
     $result=$mysqli->query($query);
     $row=  mysqli_fetch_array($result);
     $recordsperpage=7;
-    $totalpages=  ceil($row[0]/$recordsperpage);
+    $totalpages=  ceil($row[0]/$recordsperpage);*/
     $offset=($thispage-1)*$recordsperpage;
     $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, productImage,"
             . " productCategory, productSellerId from Inventory where productSellerId='$seller' ORDER BY productID DESC LIMIT $offset,$recordsperpage";
@@ -61,15 +63,16 @@ $mysqli->close();
 function get_products_bySearch($search,$thispage)
 {
     include 'Database.php';
+    $recordsperpage=7;
     $searchTerms = explode(' ', $search);
     $newSearchString=implode('* ', $searchTerms)."*";
-    $query="SELECT count(productID) FROM Inventory WHERE match(productName, productDescShort, "
+    /*$query="SELECT count(productID) FROM Inventory WHERE match(productName, productDescShort, "
                 . "productDescLong, productCategory) against ('$newSearchString' in boolean mode)";
-    error_log($query);
+    //error_log($query);
     $result=$mysqli->query($query);
     $row=  mysqli_fetch_array($result);
     $recordsperpage=7;
-    $totalpages=  ceil($row[0]/$recordsperpage);
+    $totalpages=  ceil($row[0]/$recordsperpage);*/
     $offset=($thispage-1)*$recordsperpage;
     /*$searchTerms = explode(' ', $search);
     $searchTermBits = array();

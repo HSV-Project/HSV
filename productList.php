@@ -9,12 +9,13 @@ if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET[
         $thispage=1;
     else
         $thispage=$_GET['page'];
-    $productList = get_products_byDepartment($department,$thispage);
     $query="SELECT count(productID) FROM Inventory WHERE productCategory='$department'";
     $result=$mysqli->query($query);
     $row=  mysqli_fetch_array($result);
     $recordsperpage=7;
     $totpages=  ceil($row[0]/$recordsperpage);
+    $productList = get_products_byDepartment($department,$thispage);
+    
     $whichList='department';
 } elseif ((isset($_GET['user']) && !empty($_GET['user'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='seller'))) {
      if((isset($_GET['user']) && !empty($_GET['user'])))
