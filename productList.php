@@ -3,8 +3,15 @@ include 'productListBackend.php';
 include 'Database.php';
 
 session_start();
-if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='department'))) {
-    $department = $_GET['department'];
+if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET['stringReq']) && !empty ($_POST['stringReq'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='department'))) {
+    if(isset($_GET['department']))
+        $department = $_GET['department'];
+    elseif(isset($_GET['stringReq']))
+        $department=$_GET['stringReq'];
+    else
+        $department="";
+    
+    error_log($department);
     if(!isset($_GET['page']))
         $thispage=1;
     else
@@ -15,7 +22,7 @@ if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET[
     $recordsperpage=7;
     $totpages=  ceil($row[0]/$recordsperpage);
     $productList = get_products_byDepartment($department,$thispage);
-    
+    $stringReq=$department;
     $whichList='department';
 } elseif ((isset($_GET['user']) && !empty($_GET['user'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='seller'))) {
      if((isset($_GET['user']) && !empty($_GET['user'])))
@@ -35,10 +42,16 @@ if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET[
     $row=  mysqli_fetch_array($result);
     $recordsperpage=7;
     $totpages=  ceil($row[0]/$recordsperpage);
-    
+    $stringReq="";
     $whichList="seller";
 }
-elseif((isset($_POST['search']) && !empty ($_POST['search'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='department'))) {
+elseif((isset($_POST['search']) && !empty ($_POST['search'])) || (isset($_GET['stringReq']) && !empty ($_POST['stringReq'])) || (isset($_GET['whichList']) && ($_GET['whichList']=='department'))) {
+    if(isset($_POST['search']))
+        $search=$_POST['search'];
+    elseif(isset($_GET['stringReq']))
+        $search=$_GET['stringReq'];
+    else
+        $search="";
     $search=$_POST['search'];
     if(!isset($_GET['page']))
         $thispage=1;
@@ -54,7 +67,7 @@ elseif((isset($_POST['search']) && !empty ($_POST['search'])) || (isset($_GET['w
     $row=  mysqli_fetch_array($result);
     $recordsperpage=7;
     $totpages=  ceil($row[0]/$recordsperpage);
-    
+    $stringReq=$search;
     $whichList="search";
 }
  else {
@@ -153,7 +166,7 @@ $_SESSION['productList']=$productList;
                      
                          if($thispage>1){
                             $page=$thispage-1;
-                            $prevpage= "productList.php?whichList=$whichList&page=$page"; 
+                            $prevpage= "productList.php?whichList=$whichList&page=$page&stringReq=$stringReq"; 
                         }else{
                             $prevpage="";
                         }
@@ -162,7 +175,7 @@ $_SESSION['productList']=$productList;
                         {
                              
                             $page = $thispage + 1;
-                            $nextpage = "productList.php?whichList=$whichList&page=$page";
+                            $nextpage = "productList.php?whichList=$whichList&page=$page&stringReq=$stringReq";
                         } else
                         {
                             $nextpage = "";
@@ -190,7 +203,7 @@ $_SESSION['productList']=$productList;
                                    
                                <?php } else
                                {
-                                  $bar = "productList.php?whichList=$whichList&page=$page"; ?>
+                                  $bar = "productList.php?whichList=$whichList&page=$page&stringReq=$stringReq"; ?>
                                 <li class="page-item"><a class="page-link" href="<?php echo $bar ?>"><?php echo $page ?></a></li>
                                 <li class="page-item active">
                                <?php }
