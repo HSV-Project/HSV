@@ -128,9 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="box">
 
                                 								
-                                <!--<p class="text-center buttons">
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>                                  
-                                </p>-->
 
                                         <form action="setTheCookies.php" method="post">
                                                 <h1 class="text-center"><?php echo $productName; ?></h1>

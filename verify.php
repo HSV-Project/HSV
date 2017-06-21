@@ -26,6 +26,27 @@ if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !
         // Set the user status to active (active = 1)
         $mysqli->query("UPDATE Users SET active='1' WHERE email='$email'") or die($mysqli->error);
         $_SESSION['active'] = 1;
+		
+		$result = $mysqli->query("SELECT * FROM Users WHERE email='$email'");
+		$user = $result->fetch_assoc();
+		
+		
+		$_SESSION['userID'] = $user['userID'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['first_name'] = $user['firstName'];
+        $_SESSION['last_name'] = $user['lastName'];
+        $_SESSION['active'] = $user['active'];
+	//$_SESSION['seller'] = $user['seller'];
+
+		$_SESSION['seller'] = $user['seller'];
+		
+		$_SESSION['id'] = $user['userID'];
+
+        
+        // This is how we'll know the user is logged in
+        $_SESSION['logged_in'] = true;
+		
+		
         
         header("location: success.php");
     }
