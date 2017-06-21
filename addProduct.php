@@ -77,7 +77,7 @@ if($uploadOk==1)
             . "productImage, productSellerId) values ('$pName','$shortDesc','$longDesc','$price',"
             . "'$quantity',CURDATE(),'$department','$imageName','$sellerId')";
 
-    error_log($query);
+    //error_log($query);
     $result=$mysqli->query($query);
     if($mysqli->affected_rows!=-1){
         $insertedId=$mysqli->insert_id;
@@ -91,7 +91,7 @@ if($uploadOk==1)
             $success = upload_Img($imgNameRef, $imageName);
         }
         $query="UPDATE Inventory SET productImage='$imageName' WHERE productID='$insertedId'";
-        error_log($query);
+        //error_log($query);
         $result=$mysqli->query($query);
         if($mysqli->affected_rows!=-1){
             if ($success == 1) {
@@ -106,7 +106,7 @@ if($uploadOk==1)
             . "AND productQuantityAvail='$quantity' AND productCategory='$department' AND productSellerId='$sellerId'";
     
     $result=$mysqli->query($query);
-    error_log($query);
+    //error_log($query);
     $productId;
     
     if ($result->num_rows > 0) {

@@ -11,7 +11,7 @@ if ((isset($_GET['department']) && !empty($_GET['department'])) || (isset($_GET[
     else
         $department="";
     
-    error_log($department);
+    //error_log($department);
     if(!isset($_GET['page']))
         $thispage=1;
     else

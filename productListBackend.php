@@ -47,7 +47,7 @@ function get_products_bySeller($seller,$thispage){
     $query="SELECT productID, productName, productDescShort, productDescLong, productPrice, productQuantityAvail, productAddedDate, productCategory, productImage,"
             . " productCategory, productSellerId from Inventory where productSellerId='$seller' ORDER BY productID DESC LIMIT $offset,$recordsperpage";
     
-    error_log($query);
+    //error_log($query);
     /* @var $result type */
     $result = $mysqli->query($query);
     $res_array=array();
