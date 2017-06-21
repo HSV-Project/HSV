@@ -142,7 +142,7 @@ $_SESSION['productList']=$productList;
                                     <?php } ?>
 						
 						<div class="col-md-3" >
-							<img src="<?php echo $productImage; ?>" class="img-responsive" alt="books"  >
+							<img src="<?php echo $productImage; ?>" class="img-responsive center-block" alt="books" style="max-height: 20em;" >
 						</div>
 						<div class="col-md-9">
                                                     <br/>
