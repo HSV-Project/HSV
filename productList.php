@@ -135,7 +135,7 @@ $_SESSION['productList']=$productList;
                             ?>
 			<div class="panel panel-default">
 				<div class="row ">
-                                    <?php if(isset($_GET['user']) || $_GET['whichList']=='seller') { ?>
+                                    <?php if(isset($_GET['user']) || (isset($_GET['whichList']) && $_GET['whichList']=='seller')) { ?>
                                     <a href="sellerEditProduct.php?productId=<?php echo $productID; ?>">
                                     <?php } else{ ?>
                                     <a href="productDetail.php?productId=<?php echo $productID; ?>">
