@@ -201,10 +201,10 @@
                     <br/>
                     <label for="pCategory" id="departmentLabel"><p ><?php echo $productCategory ?></p><i class="icon-star"></i></label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="edit2">Edit</a>
-                    <select name="department" id="department" class="form-control" value="<?php echo $productCategory; ?>" style="display:none" required="">
-                        <option value="Books">Books</option>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Electronics">Electronics</option>
+                    <select name="department" id="department" class="form-control"  style="display:none" required="">
+                        <option value="Books" <?php if($productCategory=="Books") {?> selected="selected" <?php } ?>>Books</option>
+                        <option value="Furniture" <?php if($productCategory=="Furniture") {?> selected="selected" <?php } ?>>Furniture</option>
+                        <option value="Electronics" <?php if($productCategory=="Electronics") {?> selected="selected" <?php } ?>>Electronics</option>
                     </select>
                     
                 </div>
@@ -254,7 +254,8 @@
                         Main Image
                       </label>
                     <br/>
-                    <label for="pImage" id="imageMainLabel"><p ><img src="<?php echo $productImage ?>" alt="Book Image" height="200" width="200"></p><i class="icon-star"></i></label>
+                    <?php $randomNo=rand(1000,9000); ?>
+                    <label for="pImage" id="imageMainLabel"><p ><img src="<?php echo $productImage."?dummy=$randomNo" ?>" alt="Book Image" height="200" width="200"></p><i class="icon-star"></i></label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="edit7">Edit</a>
                     <input type="file" class="form-control" name="imageMain" autocomplete="off" id="imageMain" accept="image/*" value="<?php echo $productImage ?>" style="display:none" onchange="document.getElementById('imageMain').value = this.value"/>
                 </div>
