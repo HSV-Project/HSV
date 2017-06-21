@@ -36,7 +36,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
 
         Please click this link to reset your password:
 
-        http://www.cosc631.info/reset.php?email='.$email.'&hash='.$hash;  
+        https://www.cosc631.info/reset.php?email='.$email.'&hash='.$hash;  
 
         mail($to, $subject, $message_body,'from:cosc631project');
 
