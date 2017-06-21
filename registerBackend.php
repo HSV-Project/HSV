@@ -53,7 +53,7 @@ else { // Email doesn't already exist in a database, proceed...
 
         Please click this link to activate your account:
 
-        http://cosc631.ml/verify.php?email='.$email.'&hash='.$hash;  //will have to change this for amazon site hosting
+        http://www.cosc631.info/verify.php?email='.$email.'&hash='.$hash;  //will have to change this for amazon site hosting
 
         mail( $to, $subject, $message_body,'from:cosc631project' );
 
