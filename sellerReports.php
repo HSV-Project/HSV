@@ -46,9 +46,10 @@
         $toDate=new DateTime($_POST['toDate']);
         $toDate->modify('+1 day');
         $toDate=$toDate->format('Y-m-d');
-        $query="select Inventory.productID as productID, Inventory.productName as productName, sum(purchaseHistory.quantityPurchased) as quantitySold,"
-                . " Inventory.productQuantityAvail as quantityAvail from purchaseHistory, Inventory where purchaseHistory.productID=Inventory.productID and "
-                . "dateTimePurchased between '$fromDate' and '$toDate'  and Inventory.productSellerId='$sellerId' group by Inventory.productID order by quantityAvail;";
+        $query="select Inventory.productID as productID, Inventory.productName as productName, coalesce(sum(purchaseHistory.quantityPurchased),0) as quantitySold,"
+                . " Inventory.productQuantityAvail as quantityAvail from Inventory left join purchaseHistory on purchaseHistory.productID=Inventory.productID "
+                . "where (dateTimePurchased is null or dateTimePurchased between '$fromDate' and '$toDate')  and Inventory.productSellerId='$sellerId' "
+                . "group by Inventory.productID order by quantityAvail;";
 
 
         $result=$mysqli->query($query);
