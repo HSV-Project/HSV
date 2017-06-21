@@ -65,7 +65,7 @@ if(isset($_SESSION['id'])){
 					<a href="productDetail.php?productId=<?php echo $row['productId']; ?>">
 						
 						<div class="col-md-3">
-							<img src="<?php echo $row['productImage'];?>" class="img-responsive" alt="books"  >
+							<img src="<?php echo $row['productImage'];?>" class="img-responsive center-block" alt="books" style="max-height: 20em;"   >
 						</div>
 						<div class="col-md-7">
 							<p><strong class="text-primary">Product Name: </strong><span class="text-success"><?php echo $row['productName'];?><span></p>
