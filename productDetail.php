@@ -128,9 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="box">
 
                                 								
-                                <p class="text-center buttons">
+                                <!--<p class="text-center buttons">
                                     <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>                                  
-                                </p>
+                                </p>-->
 
                                         <form action="setTheCookies.php" method="post">
                                                 <h1 class="text-center"><?php echo $productName; ?></h1>
@@ -146,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <button type="submit" class="btn btn-primary <?php if($productQuantityAvail==0){echo "hidden";} else{ echo checkIfAlreadyInCartThenHide($productID);}?>"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                                         <a href="cart.php" type="submit" class="btn btn-primary <?php echo checkIfNotInCartThenHide($productID);?>"><i class="fa fa-shopping-cart"></i>Go to cart</a>                  
                                                 </p>
+                                                
                                         </form>	
 
 
