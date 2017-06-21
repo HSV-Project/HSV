@@ -172,7 +172,7 @@
             ?>
             <tr>
               <td style="text-align:center;"><?php echo $productName; ?></td>
-              <td style="text-align:center;">$<?php echo $quantitySold; ?></td>
+              <td style="text-align:center;"><?php echo $quantitySold; ?></td>
               <td style="text-align:center;"><?php echo $quantityAvail; ?></td>
 
             </tr>
